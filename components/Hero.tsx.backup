@@ -1,0 +1,354 @@
+'use client';
+import { motion } from 'framer-motion';
+import { useRef, useEffect } from 'react';
+import { FaArrowRight } from 'react-icons/fa';
+import { useTheme } from '@/hooks/useTheme';
+import { useAnimatedBackground } from '@/hooks/useAnimatedBackground';
+
+export default function Hero() {
+  const textRef = useRef<HTMLDivElement | null>(null);
+  
+  // Use custom hooks for theme and animated background
+  const isDark = useTheme();
+  const { sectionRef, bgRef, cursorHolderRef } = useAnimatedBackground(isDark, {
+    trailCount: 12,
+    trailHeight: 'h-28 md:h-32'
+  });
+
+
+
+  // watch theme changes (Tailwind class toggle or media)
+  useEffect(() => {
+    const root = document.documentElement;
+    const mm = window.matchMedia?.('(prefers-color-scheme: dark)');
+    const update = () => setIsDark(root.classList.contains('dark') || mm?.matches || false);
+    const observer = new MutationObserver(update);
+    observer.observe(root, { attributes: true, attributeFilter: ['class'] });
+    mm?.addEventListener?.('change', update);
+    return () => {
+      observer.disconnect();
+      mm?.removeEventListener?.('change', update);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!bgRef.current || !sectionRef.current) return;
+
+    // palettes tailored for each theme
+    const neonDark = [
+      'rgba(243,140,23,1)',  // orange neon
+      'rgba(0,230,255,1)',   // cyan neon
+      'rgba(255,77,255,1)',  // pink neon
+      'rgba(57,255,20,1)',   // green neon
+      'rgba(255,215,0,1)',   // gold neon
+    ];
+    // softer, light-mode friendly hues (semi-transparent)
+    const pastelLight = [
+      'rgba(255, 149, 64, 0.7)',   // soft orange
+      'rgba(64, 186, 255, 0.7)',   // sky blue
+      'rgba(255, 120, 220, 0.7)',  // soft pink
+      'rgba(120, 200, 120, 0.7)',  // mint
+      'rgba(246, 208, 80, 0.7)',   // warm yellow
+    ];
+
+    const colors = isDark ? neonDark : pastelLight;
+    const blendClass = isDark ? 'mix-blend-screen' : 'mix-blend-multiply';
+    const blurPx = isDark ? 12 : 6;
+    const baseOpacity = isDark ? 0.85 : 0.55;
+
+    // ---------- CLEAN UP ANY PRIOR RUN BEFORE REBUILD ----------
+    colorTweensRef.current.forEach((tw) => tw.kill());
+    driftTweensRef.current.forEach((tw) => tw.kill());
+    trailsRef.current.forEach((t) => t.remove());
+    trailsRef.current = [];
+    basePosRef.current = [];
+    moversRef.current = [];
+    colorTweensRef.current = [];
+    driftTweensRef.current = [];
+
+    // ---------- SCATTER TRAILS ----------
+    const trails: HTMLDivElement[] = [];
+    const basePos: { x: number; y: number }[] = [];
+    const movers: { x: ((v: number) => void) | null; y: ((v: number) => void) | null }[] = [];
+    const colorTweens: gsap.core.Tween[] = [];
+    const driftTweens: gsap.core.Tween[] = [];
+
+    const TRAIL_COUNT = 12;
+    const rect = sectionRef.current.getBoundingClientRect();
+
+    for (let i = 0; i < TRAIL_COUNT; i++) {
+      const t = document.createElement('div');
+
+      // random base position in pixels
+      const baseX = Math.random() * rect.width;
+      const baseY = Math.random() * rect.height;
+
+      t.className = `absolute w-1.5 h-28 md:h-32 rounded-full ${blendClass}`;
+      t.style.background = colors[Math.floor(Math.random() * colors.length)];
+      t.style.opacity = String(baseOpacity);
+      t.style.filter = `blur(${blurPx}px) drop-shadow(0 0 ${isDark ? 16 : 6}px currentColor)`;
+      bgRef.current.appendChild(t);
+
+      // place centered at baseX/baseY via transforms
+      gsap.set(t, { x: baseX, y: baseY, xPercent: -50, yPercent: -50 });
+
+      trails.push(t);
+      basePos.push({ x: baseX, y: baseY });
+
+      movers.push({
+        x: gsap.quickTo(t, 'x', { duration: 0.24, ease: 'power3.out' }),
+        y: gsap.quickTo(t, 'y', { duration: 0.24, ease: 'power3.out' }),
+      });
+
+      // subtle color shimmer (lower intensity on light)
+      colorTweens.push(
+        gsap.to(t, {
+          backgroundColor: () => colors[Math.floor(Math.random() * colors.length)],
+          repeat: -1,
+          yoyo: true,
+          duration: isDark ? 2.8 + Math.random() * 0.8 : 3.6 + Math.random() * 0.9,
+          ease: 'sine.inOut',
+        })
+      );
+
+      // lazy drifting (relative to current transform position)
+      const driftStep = () =>
+        gsap.to(t, {
+          x: `+=${Math.random() * (isDark ? 400 : 280) - (isDark ? 200 : 140)}`,
+          y: `+=${Math.random() * (isDark ? 300 : 200) - (isDark ? 150 : 100)}`,
+          rotation: Math.random() * 360,
+          duration: 10 + Math.random() * 6,
+          ease: 'sine.inOut',
+          onComplete: driftStep,
+        });
+      driftTweens.push(driftStep());
+    }
+
+    trailsRef.current = trails;
+    basePosRef.current = basePos;
+    moversRef.current = movers;
+    colorTweensRef.current = colorTweens;
+    driftTweensRef.current = driftTweens;
+
+    // re-scatter on resize (for current theme)
+    const onResize = () => {
+      const r = sectionRef.current?.getBoundingClientRect();
+      if (!r) return;
+      trailsRef.current.forEach((t, i) => {
+        const nx = Math.random() * r.width;
+        const ny = Math.random() * r.height;
+        basePosRef.current[i] = { x: nx, y: ny };
+        gsap.set(t, { x: nx, y: ny, xPercent: -50, yPercent: -50 });
+      });
+    };
+    window.addEventListener('resize', onResize);
+
+    // ---------- TINY DOT RING CURSOR ----------
+    // rebuild the cursor (so colors/blend update with theme)
+    cursorRotateTween.current?.kill();
+    cursorRef.current?.remove();
+    const CURSOR_SIZE = 14;
+    const DOT_COUNT = 8;
+    const DOT_SIZE = 2;
+    const RADIUS = 5;
+
+    const cursor = document.createElement('div');
+    cursor.className = 'pointer-events-none absolute z-40 will-change-transform';
+    cursor.style.width = `${CURSOR_SIZE}px`;
+    cursor.style.height = `${CURSOR_SIZE}px`;
+    cursor.style.transform = 'translate(-50%, -50%)';
+    cursor.style.opacity = '0'; // show on hover
+    // softer glow on light, stronger in dark
+    cursor.style.filter = isDark
+      ? 'drop-shadow(0 0 2px rgba(255,255,255,0.35))'
+      : 'drop-shadow(0 0 1px rgba(0,0,0,0.25))';
+    (cursorHolderRef.current ?? sectionRef.current).appendChild(cursor);
+    cursorRef.current = cursor;
+
+    for (let i = 0; i < DOT_COUNT; i++) {
+      const angle = (i / DOT_COUNT) * 2 * Math.PI;
+      const cx = CURSOR_SIZE / 2;
+      const cy = CURSOR_SIZE / 2;
+      const x = cx + Math.cos(angle) * RADIUS;
+      const y = cy + Math.sin(angle) * RADIUS;
+
+      const d = document.createElement('div');
+      d.style.position = 'absolute';
+      d.style.width = `${DOT_SIZE}px`;
+      d.style.height = `${DOT_SIZE}px`;
+      d.style.left = `${x - DOT_SIZE / 2}px`;
+      d.style.top = `${y - DOT_SIZE / 2}px`;
+      d.style.borderRadius = '50%';
+      d.style.background = colors[i % colors.length];
+      d.style.opacity = isDark ? '0.95' : '0.9';
+      cursor.appendChild(d);
+    }
+
+    const center = document.createElement('div');
+    center.style.position = 'absolute';
+    center.style.width = '2px';
+    center.style.height = '2px';
+    center.style.left = '50%';
+    center.style.top = '50%';
+    center.style.transform = 'translate(-50%, -50%)';
+    center.style.borderRadius = '50%';
+    center.style.background = isDark ? 'white' : 'black';
+    center.style.opacity = isDark ? '0.9' : '0.7';
+    cursor.appendChild(center);
+
+    cursorRotateTween.current = gsap.to(cursor, { rotate: 360, repeat: -1, duration: 8, ease: 'none' });
+    cursorMoveX.current = gsap.quickTo(cursor, 'left', { duration: 0.10, ease: 'power3.out' });
+    cursorMoveY.current = gsap.quickTo(cursor, 'top', { duration: 0.10, ease: 'power3.out' });
+
+    // ---------- INTERACTION ----------
+    const REPULSION_RADIUS = isDark ? 220 : 180; // tighter on light
+    const MAX_REPEL = isDark ? 140 : 110;        // gentler on light
+    const POWER = 2;
+
+    const handleMove = (clientX: number, clientY: number) => {
+      const r = sectionRef.current?.getBoundingClientRect();
+      if (!r) return;
+      const mx = clientX - r.left;
+      const my = clientY - r.top;
+
+      cursorMoveX.current?.(mx);
+      cursorMoveY.current?.(my);
+
+      trailsRef.current.forEach((t, i) => {
+        const base = basePosRef.current[i];
+        const bx = base.x;
+        const by = base.y;
+        const dx = bx - mx;
+        const dy = by - my;
+        const d = Math.hypot(dx, dy);
+
+        if (d < REPULSION_RADIUS) {
+          const nX = dx / (d || 1);
+          const nY = dy / (d || 1);
+          const tNorm = 1 - d / REPULSION_RADIUS;
+          const mag = Math.pow(tNorm, POWER) * MAX_REPEL;
+          moversRef.current[i].x?.(bx + nX * mag);
+          moversRef.current[i].y?.(by + nY * mag);
+        }
+      });
+    };
+
+    const onMouseMove = (e: MouseEvent) => handleMove(e.clientX, e.clientY);
+    const onTouchMove = (e: TouchEvent) => {
+      const t = e.touches[0];
+      if (t) handleMove(t.clientX, t.clientY);
+    };
+
+    const onEnter = () => {
+      if (!cursorRef.current) return;
+      cursorRef.current.style.opacity = '1';
+      colorTweensRef.current.forEach((tw) => tw.timeScale(isDark ? 1.2 : 1.05));
+      driftTweensRef.current.forEach((tw) => tw.timeScale(isDark ? 1.1 : 1.05));
+    };
+    const onLeave = () => {
+      if (!cursorRef.current) return;
+      cursorRef.current.style.opacity = '0';
+      colorTweensRef.current.forEach((tw) => tw.timeScale(1));
+      driftTweensRef.current.forEach((tw) => tw.timeScale(1));
+    };
+
+    const el = sectionRef.current!;
+    el.addEventListener('mousemove', onMouseMove);
+    el.addEventListener('touchmove', onTouchMove, { passive: true });
+    el.addEventListener('mouseenter', onEnter);
+    el.addEventListener('mouseleave', onLeave);
+
+    return () => {
+      window.removeEventListener('resize', onResize);
+      el.removeEventListener('mousemove', onMouseMove);
+      el.removeEventListener('touchmove', onTouchMove);
+      el.removeEventListener('mouseenter', onEnter);
+      el.removeEventListener('mouseleave', onLeave);
+
+      colorTweensRef.current.forEach((tw) => tw.kill());
+      driftTweensRef.current.forEach((tw) => tw.kill());
+      cursorRotateTween.current?.kill();
+
+      trailsRef.current.forEach((t) => t.remove());
+      trailsRef.current = [];
+      basePosRef.current = [];
+      moversRef.current = [];
+      colorTweensRef.current = [];
+      driftTweensRef.current = [];
+
+      cursorRef.current?.remove();
+      cursorRef.current = null;
+    };
+  }, [isDark]); // rebuild visuals when theme changes
+
+  // hero text intro
+  useEffect(() => {
+    if (!textRef.current) return;
+    gsap.fromTo(
+      textRef.current.children,
+      { opacity: 0, y: 40 },
+      { opacity: 1, y: 0, stagger: 0.15, duration: 1, ease: 'power3.out', delay: 0.2 }
+    );
+  }, []);
+
+  return (
+    <section
+      ref={sectionRef}
+      className="
+        relative min-h-[80vh] md:min-h-[90vh] flex items-center justify-center overflow-hidden
+        bg-gradient-to-b from-white via-slate-50 to-slate-100
+        dark:from-gray-900 dark:via-black dark:to-[#0f1115]
+      "
+    >
+      {/* Light-mode vignette to add depth without harshness */}
+      <div
+        aria-hidden
+        className="
+          absolute inset-0 z-0 pointer-events-none
+          [background:radial-gradient(60%_60%_at_50%_40%,rgba(0,0,0,0.05),transparent_70%)]
+          dark:[background:none]
+        "
+      />
+
+      {/* Animated trails container */}
+      <div ref={bgRef} className="absolute inset-0 z-[1] overflow-hidden" />
+
+      {/* Smooth gradient overlays for blending */}
+      <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-transparent to-transparent dark:from-black/30 dark:via-black/10 dark:to-transparent z-[2] pointer-events-none" />
+      <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-slate-100 dark:to-[#0f1115] z-[3] pointer-events-none" />
+
+      {/* Hero Text */}
+      <div
+        ref={textRef}
+        className="relative z-[4] flex flex-col items-center justify-center text-center px-4 max-w-2xl mx-auto"
+      >
+        <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white drop-shadow-[0_1px_0_rgba(255,255,255,0.2)] dark:drop-shadow-lg">
+          Your Complete IT Partner for{' '}
+          <span className="text-brand-700 dark:text-brand-400">Digital Success.</span>
+        </h1>
+        <p className="mt-5 text-lg md:text-xl text-slate-700 dark:text-gray-200 max-w-prose">
+          From web and app development to debugging, hosting, maintenance, SEO, ERP, and AI/LLM training,
+          our expert team delivers comprehensive IT solutions tailored for your business success.
+        </p>
+        <div className="mt-8 flex flex-col sm:flex-row items-center gap-4">
+          <motion.a
+            href="/contact"
+            className="
+              px-6 py-3 rounded-xl text-white font-medium inline-flex items-center gap-2 shadow-md transition-transform
+              bg-brand-700 hover:bg-brand-800 focus:outline-none focus:ring-2 focus:ring-brand-400
+              dark:bg-brand-600 dark:hover:bg-brand-500
+            "
+            whileHover={{ scale: 1.07 }}
+            whileTap={{ scale: 0.96 }}
+            transition={{ type: 'spring', stiffness: 200, damping: 18 }}
+          >
+            Start a Project <FaArrowRight />
+          </motion.a>
+        </div>
+      </div>
+
+      {/* holder where the tiny cursor ring gets mounted */}
+      <div ref={cursorHolderRef} className="absolute inset-0 z-[5] pointer-events-none" />
+    </section>
+  );
+}
