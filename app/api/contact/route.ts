@@ -1,85 +1,146 @@
-import { NextRequest, NextResponse } from 'next/server';
-import nodemailer from 'nodemailer';
+import { NextRequest, NextResponse } from "next/server";
+import nodemailer from "nodemailer";
 
-export async function POST(req: NextRequest) {
-    try {
-        console.log('[Contact API] Incoming request...');
-        const body = await req.text();
-        console.log('[Contact API] Raw body:', body);
+export const runtime = "nodejs";
 
-        let name: string, email: string, message: string, phone: string | undefined;
-        try {
-            const json = JSON.parse(body);
-            name = json.name;
-            email = json.email;
-            message = json.message;
-            phone = json.phone;
-        } catch (parseErr) {
-            console.error('[Contact API] Failed to parse JSON:', parseErr);
-            return NextResponse.json({ error: 'Invalid JSON body.' }, { status: 400 });
-        }
-
-        console.log('[Contact API] Parsed fields:', { name, email, message, phone });
-
-        if (!name || !email || !message) {
-            console.warn('[Contact API] Missing required fields:', { name, email, message });
-            return NextResponse.json({ error: 'Missing required fields.' }, { status: 400 });
-        }
-
-        // Log environment variables (do not log secrets in production)
-        console.log('[Contact API] SMTP config:', {
-            SMTP_HOST: process.env.SMTP_HOST,
-            SMTP_PORT: process.env.SMTP_PORT,
-            SMTP_SECURE: process.env.SMTP_SECURE,
-            SMTP_USER: process.env.SMTP_USER,
-        });
-
-        // Configure your SMTP transporter
-        let transporter;
-        try {
-            transporter = nodemailer.createTransport({
-                host: process.env.SMTP_HOST,
-                port: Number(process.env.SMTP_PORT),
-                secure: process.env.SMTP_SECURE === 'true',
-                auth: {
-                    user: process.env.SMTP_USER,
-                    pass: process.env.SMTP_PASS,
-                },
-            });
-        } catch (transporterErr: any) {
-            console.error('[Contact API] Failed to create transporter:', transporterErr);
-            return NextResponse.json({ error: 'Failed to configure mail transporter.' }, { status: 500 });
-        }
-
-        // Email content
-        const mailOptions = {
-    from: process.env.SMTP_USER, // Always your authenticated email
-    replyTo: email, // User's email for replies
-    to: 'sales@indovatetechnologies.com',
-    subject: 'New Contact Form Submission by ' + name,
-    html: `
-        <h2>Contact Form Submission</h2>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        ${phone ? `<p><strong>Phone:</strong> ${phone}</p>` : ''}
-        <p><strong>Message:</strong></p>
-        <p>${message}</p>
-    `,
+type ContactRequestBody = {
+  name?: string;
+  email?: string;
+  company?: string;
+  phone?: string;
+  message?: string;
 };
 
-        console.log('[Contact API] Sending email with options:', mailOptions);
+function escapeHtml(value: string): string {
+  return value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
 
-        try {
-            const info = await transporter.sendMail(mailOptions);
-            console.log('[Contact API] Email sent:', info);
-        } catch (sendErr: any) {
-            console.error('[Contact API] Failed to send email:', sendErr);
-            return NextResponse.json({ error: sendErr?.message || 'Failed to send email.' }, { status: 500 });
-        }
+function getRequiredEnv(key: string): string {
+  const value = process.env[key];
 
-        return NextResponse.json({ success: true });
-    } catch (error: any) {
-        console.error('[Contact API] Unexpected error:', error);
-        return NextResponse.json({ error: error?.message || 'Failed to send email.' }, { status: 500 });
+  if (!value) {
+    throw new Error(`Missing required environment variable: ${key}`);
+  }
+
+  return value;
+}
+
+function isValidEmail(email: string): boolean {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+export async function POST(req: NextRequest) {
+  try {
+    const body = (await req.json()) as ContactRequestBody;
+
+    const name = body.name?.trim();
+    const email = body.email?.trim();
+    const company = body.company?.trim();
+    const phone = body.phone?.trim();
+    const message = body.message?.trim();
+
+    if (!name || !email || !message) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Name, email, and message are required.",
+        },
+        { status: 400 },
+      );
     }
+
+    if (!isValidEmail(email)) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Please enter a valid email address.",
+        },
+        { status: 400 },
+      );
+    }
+
+    const smtpHost = getRequiredEnv("SMTP_HOST");
+    const smtpPort = Number(getRequiredEnv("SMTP_PORT"));
+    const smtpSecure = process.env.SMTP_SECURE === "true";
+    const smtpUser = getRequiredEnv("SMTP_USER");
+    const smtpPass = getRequiredEnv("SMTP_PASS");
+
+    const toEmail =
+      process.env.CONTACT_TO_EMAIL || "kailas.bidve@indovatetechnologies.com";
+
+    const fromName = process.env.CONTACT_FROM_NAME || "Indovate Website";
+
+    const transporter = nodemailer.createTransport({
+      host: smtpHost,
+      port: smtpPort,
+      secure: smtpSecure,
+      auth: {
+        user: smtpUser,
+        pass: smtpPass,
+      },
+    });
+
+    const safeName = escapeHtml(name);
+    const safeEmail = escapeHtml(email);
+    const safeCompany = company ? escapeHtml(company) : "";
+    const safePhone = phone ? escapeHtml(phone) : "";
+    const safeMessage = escapeHtml(message).replace(/\n/g, "<br />");
+
+    await transporter.sendMail({
+      from: `"${fromName}" <${smtpUser}>`,
+      to: toEmail,
+      replyTo: email,
+      subject: `New Contact Form Submission by ${name}`,
+      html: `
+        <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #111827;">
+          <h2>New Contact Form Submission</h2>
+
+          <p><strong>Name:</strong> ${safeName}</p>
+          <p><strong>Email:</strong> ${safeEmail}</p>
+          ${safeCompany ? `<p><strong>Company:</strong> ${safeCompany}</p>` : ""}
+          ${safePhone ? `<p><strong>Phone:</strong> ${safePhone}</p>` : ""}
+
+          <p><strong>Message:</strong></p>
+          <p>${safeMessage}</p>
+        </div>
+      `,
+      text: `
+New Contact Form Submission
+
+Name: ${name}
+Email: ${email}
+${company ? `Company: ${company}` : ""}
+${phone ? `Phone: ${phone}` : ""}
+
+Message:
+${message}
+      `.trim(),
+    });
+
+    return NextResponse.json(
+      {
+        success: true,
+        message: "Email sent successfully.",
+      },
+      { status: 200 },
+    );
+  } catch (error: any) {
+    console.error("[Contact API] Failed to send contact email:", error);
+
+    return NextResponse.json(
+      {
+        success: false,
+        error:
+          process.env.NODE_ENV === "development"
+            ? error?.message || "Failed to send email."
+            : "Failed to send email.",
+      },
+      { status: 500 },
+    );
+  }
 }

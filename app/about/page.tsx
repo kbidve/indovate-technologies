@@ -75,7 +75,7 @@ export default function AboutPage() {
       </div>
       <div className="mt-10 card p-6 bg-white/80 dark:bg-gray-900/80">
         <h3 className="font-semibold text-lg mb-2 text-gray-900 dark:text-gray-100">Contact & Address</h3>
-        <p className="text-gray-700 dark:text-gray-300 mb-1">Email: <a href="mailto:sales@indovatetechnologies.com" className="text-brand-600 hover:underline">sales@indovatetechnologies.com</a></p>
+        <p className="text-gray-700 dark:text-gray-300 mb-1">Email: <a href="mailto:kailas.bidve@indovatetechnologies.com" className="text-brand-600 hover:underline">kailas.bidve@indovatetechnologies.com</a></p>
         <p className="text-gray-700 dark:text-gray-300">2nd floor, Shinde heights, Khori Galli, Vasant Nagar, Sawe Wadi, Latur, Maharashtra 413531.</p>
       </div>
     </Section>
