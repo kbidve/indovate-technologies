@@ -1,55 +1,42 @@
 "use client";
 
+import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { useTheme } from "@/hooks/useTheme";
-import { useAnimatedBackground } from "@/hooks/useAnimatedBackground";
 
 type FormStatus = "idle" | "sending" | "sent" | "error";
+
+const projectOptions = [
+  "SaaS / Product Development",
+  "ERP / Business System",
+  "AI Integration",
+  "RAG / Knowledge Assistant",
+  "LLM App / Copilot",
+  "Agentic Workflow",
+  "Cloud / DevOps / Integration",
+  "Other",
+];
 
 export default function Contact() {
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const isDark = useTheme();
-
-  const { sectionRef, bgRef, cursorHolderRef } = useAnimatedBackground(isDark, {
-    trailCount: 9,
-    trailHeight: "h-24 md:h-28",
-    quickToSettings: {
-      duration: 0.22,
-      ease: "power3.out",
-    },
-    colorAnimDuration: {
-      dark: { base: 3.0, random: 0.6 },
-      light: { base: 3.6, random: 0.9 },
-    },
-    driftSettings: {
-      dark: { range: 300, offset: 150 },
-      light: { range: 200, offset: 100 },
-      duration: { base: 12, random: 4 },
-    },
-    repulsionSettings: {
-      radius: { dark: 160, light: 130 },
-      maxRepel: { dark: 100, light: 80 },
-      power: 2,
-    },
-  });
-
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
 
     setStatus("sending");
     setErrorMessage("");
 
-    const form = e.currentTarget;
+    const form = event.currentTarget;
     const formData = new FormData(form);
 
-    const data = {
+    const projectType = formData.get("projectType") as string;
+    const message = formData.get("message") as string;
+
+    const payload = {
       name: formData.get("name") as string,
       email: formData.get("email") as string,
       company: formData.get("company") as string,
-      message: formData.get("message") as string,
+      message: projectType ? `Project Type: ${projectType}\n\n${message}` : message,
     };
 
     try {
@@ -58,7 +45,7 @@ export default function Contact() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(payload),
       });
 
       const result = await response.json().catch(() => null);
@@ -78,161 +65,155 @@ export default function Contact() {
   };
 
   return (
-    <section
-      ref={sectionRef}
-      className="
-        relative overflow-hidden rounded-3xl
-        bg-gradient-to-b from-white via-slate-50 to-slate-100
-        dark:from-gray-900 dark:via-black dark:to-[#0f1115]
-        p-1
-      "
-    >
-      <div
-        aria-hidden
-        className="
-          absolute inset-0 z-0 pointer-events-none
-          [background:radial-gradient(60%_60%_at_50%_40%,rgba(0,0,0,0.05),transparent_70%)]
-          dark:[background:none]
-        "
-      />
+    <section className="relative overflow-hidden rounded-[2rem] border border-slate-200 bg-white p-4 shadow-glass-light dark:border-white/10 dark:bg-white/[0.04] dark:shadow-glass-dark sm:p-6 lg:p-8">
+      <div className="absolute inset-0 -z-10 bg-gradient-to-br from-cyan-300/10 via-transparent to-brand-500/10" />
+      <div className="absolute right-0 top-0 -z-10 h-64 w-64 rounded-full bg-cyan-300/10 blur-3xl" />
+      <div className="absolute bottom-0 left-0 -z-10 h-72 w-72 rounded-full bg-brand-500/10 blur-3xl" />
 
-      <div ref={bgRef} className="absolute inset-0 z-[1] pointer-events-none" />
+      <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.55, ease: "easeOut" }}
+          className="rounded-3xl border border-slate-200 bg-slate-50 p-6 dark:border-white/10 dark:bg-slate-950/50"
+        >
+          <span className="text-xs font-bold uppercase tracking-[0.3em] text-brand-600 dark:text-brand-400">
+            Project Intake
+          </span>
+          <h2 className="mt-4 text-3xl font-black leading-tight sm:text-4xl">
+            Share your software or AI project brief.
+          </h2>
+          <p className="mt-4 text-slate-600 dark:text-slate-300">
+            Use this form for SaaS platforms, ERP systems, web applications, AI
+            integrations, RAG systems, LLM copilots, agentic workflows, cloud
+            deployment, or long-term engineering support.
+          </p>
 
-      <motion.div
-        className="relative z-[3] card w-full max-w-2xl mx-auto px-4 sm:px-8 py-8 bg-white/70 dark:bg-gray-900/70 backdrop-blur ring-1 ring-black/5 dark:ring-white/5"
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.5 }}
-        transition={{ duration: 0.7, ease: "easeOut" }}
-      >
-        <motion.h2 className="text-2xl font-bold">
-          Let&apos;s build something great
-        </motion.h2>
-
-        <motion.p className="text-gray-600 dark:text-gray-300 mt-2">
-          Tell us about your project and we&apos;ll get back within 24 hours.
-        </motion.p>
+          <div className="mt-6 grid gap-3 text-sm text-slate-700 dark:text-slate-300">
+            {[
+              "Architecture-first discovery",
+              "Software + AI delivery planning",
+              "Production-focused implementation",
+              "Cloud, DevOps, and support readiness",
+            ].map((item) => (
+              <div
+                key={item}
+                className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3 dark:border-white/10 dark:bg-white/[0.04]"
+              >
+                <span className="h-2 w-2 rounded-full bg-cyan-300 shadow-[0_0_18px_rgba(34,211,238,0.8)]" />
+                <span>{item}</span>
+              </div>
+            ))}
+          </div>
+        </motion.div>
 
         <motion.form
           onSubmit={onSubmit}
-          className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4"
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ duration: 0.55, ease: "easeOut", delay: 0.05 }}
+          className="grid grid-cols-1 gap-4 rounded-3xl border border-slate-200 bg-white/90 p-5 shadow-soft backdrop-blur dark:border-white/10 dark:bg-slate-950/60 sm:p-6 md:grid-cols-2"
         >
-          <input
-            name="name"
-            required
-            placeholder="Your name"
-            className="w-full rounded-xl border border-gray-300 px-4 py-3 bg-white text-gray-900 placeholder-gray-400 dark:bg-gray-800 dark:text-gray-100 dark:placeholder-gray-400 dark:border-gray-700"
-          />
+          <label className="grid gap-2 text-sm font-semibold text-slate-700 dark:text-slate-200">
+            Name
+            <input
+              name="name"
+              required
+              placeholder="Your name"
+              className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-cyan-300 focus:ring-4 focus:ring-cyan-300/10 dark:border-white/10 dark:bg-white/[0.05] dark:text-white"
+            />
+          </label>
 
-          <input
-            name="email"
-            type="email"
-            required
-            placeholder="Email"
-            className="w-full rounded-xl border border-gray-300 px-4 py-3 bg-white text-gray-900 placeholder-gray-400 dark:bg-gray-800 dark:text-gray-100 dark:placeholder-gray-400 dark:border-gray-700"
-          />
+          <label className="grid gap-2 text-sm font-semibold text-slate-700 dark:text-slate-200">
+            Email
+            <input
+              name="email"
+              type="email"
+              required
+              placeholder="you@company.com"
+              className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-cyan-300 focus:ring-4 focus:ring-cyan-300/10 dark:border-white/10 dark:bg-white/[0.05] dark:text-white"
+            />
+          </label>
 
-          <input
-            name="company"
-            placeholder="Company"
-            className="w-full rounded-xl border border-gray-300 px-4 py-3 md:col-span-2 bg-white text-gray-900 placeholder-gray-400 dark:bg-gray-800 dark:text-gray-100 dark:placeholder-gray-400 dark:border-gray-700"
-          />
+          <label className="grid gap-2 text-sm font-semibold text-slate-700 dark:text-slate-200 md:col-span-2">
+            Company
+            <input
+              name="company"
+              placeholder="Company / startup / organization"
+              className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-cyan-300 focus:ring-4 focus:ring-cyan-300/10 dark:border-white/10 dark:bg-white/[0.05] dark:text-white"
+            />
+          </label>
 
-          <textarea
-            name="message"
-            required
-            placeholder="Project details"
-            rows={5}
-            className="w-full rounded-xl border border-gray-300 px-4 py-3 md:col-span-2 bg-white text-gray-900 placeholder-gray-400 dark:bg-gray-800 dark:text-gray-100 dark:placeholder-gray-400 dark:border-gray-700"
-          />
+          <label className="grid gap-2 text-sm font-semibold text-slate-700 dark:text-slate-200 md:col-span-2">
+            Project type
+            <select
+              name="projectType"
+              defaultValue=""
+              className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-slate-950 outline-none transition focus:border-cyan-300 focus:ring-4 focus:ring-cyan-300/10 dark:border-white/10 dark:bg-slate-950 dark:text-white"
+            >
+              <option value="" disabled>
+                Select closest project type
+              </option>
+              {projectOptions.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          </label>
 
-          <div className="md:col-span-2 flex flex-col sm:flex-row sm:items-center gap-3">
+          <label className="grid gap-2 text-sm font-semibold text-slate-700 dark:text-slate-200 md:col-span-2">
+            Project details
+            <textarea
+              name="message"
+              required
+              placeholder="Tell us what you want to build, existing systems, AI requirements, timeline, and any integrations needed."
+              rows={6}
+              className="resize-none rounded-2xl border border-slate-200 bg-white px-4 py-3 text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-cyan-300 focus:ring-4 focus:ring-cyan-300/10 dark:border-white/10 dark:bg-white/[0.05] dark:text-white"
+            />
+          </label>
+
+          <div className="flex flex-col gap-3 md:col-span-2 sm:flex-row sm:items-center">
             <motion.button
               type="submit"
               disabled={status === "sending"}
-              className="px-6 py-3 rounded-xl bg-brand-600 text-white disabled:opacity-60 shadow-md transition-transform focus:outline-none focus:ring-2 focus:ring-brand-400"
-              whileHover={{
-                scale: status === "idle" || status === "error" ? 1.05 : 1,
-                boxShadow:
-                  status === "idle" || status === "error"
-                    ? "0 4px 24px #f38c1740"
-                    : undefined,
-              }}
-              whileTap={{ scale: 0.97 }}
-              animate={
-                status === "sent"
-                  ? { scale: [1, 1.15, 1], backgroundColor: "#22c55e" }
-                  : status === "error"
-                    ? { x: [0, -8, 8, -8, 8, 0] }
-                    : {}
-              }
-              transition={{ duration: status === "sent" ? 0.5 : 0.3 }}
+              whileHover={{ y: status === "sending" ? 0 : -2 }}
+              whileTap={{ scale: status === "sending" ? 1 : 0.98 }}
+              className="btn-primary disabled:cursor-not-allowed disabled:opacity-60"
             >
-              <AnimatePresence mode="wait">
-                {status === "sending" ? (
-                  <motion.span
-                    key="sending"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                  >
-                    Sending…
-                  </motion.span>
-                ) : status === "sent" ? (
-                  <motion.span
-                    key="sent"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                  >
-                    Sent ✔
-                  </motion.span>
-                ) : (
-                  <motion.span
-                    key="idle"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                  >
-                    Send message
-                  </motion.span>
-                )}
-              </AnimatePresence>
+              {status === "sending" ? "Sending..." : "Send Project Brief"}
             </motion.button>
 
-            <AnimatePresence>
-              {status === "error" && (
+            <AnimatePresence mode="wait">
+              {status === "error" ? (
                 <motion.span
-                  className="text-red-600 text-sm"
-                  initial={{ opacity: 0, x: 10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -10 }}
-                  transition={{ duration: 0.3 }}
+                  key="error"
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -6 }}
+                  className="text-sm font-medium text-red-600 dark:text-red-400"
                 >
                   {errorMessage || "Something went wrong. Try again."}
                 </motion.span>
-              )}
+              ) : null}
 
-              {status === "sent" && (
+              {status === "sent" ? (
                 <motion.span
-                  className="text-green-600 text-sm"
-                  initial={{ opacity: 0, x: 10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -10 }}
-                  transition={{ duration: 0.3 }}
+                  key="sent"
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -6 }}
+                  className="text-sm font-medium text-emerald-600 dark:text-emerald-400"
                 >
-                  Message sent successfully.
+                  Message sent successfully. We will review your brief.
                 </motion.span>
-              )}
+              ) : null}
             </AnimatePresence>
           </div>
         </motion.form>
-      </motion.div>
-
-      <div
-        ref={cursorHolderRef}
-        className="absolute inset-0 z-[4] pointer-events-none"
-      />
+      </div>
     </section>
   );
 }

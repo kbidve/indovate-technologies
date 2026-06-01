@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import gsap from 'gsap';
 
 // Configuration interface for customizing animated background
@@ -51,16 +51,81 @@ const DEFAULT_CONFIG: Required<AnimatedBackgroundConfig> = {
   }
 };
 
+
+const EMPTY_CONFIG: AnimatedBackgroundConfig = {};
+
+const NEON_DARK = [
+  'rgba(243,140,23,1)',
+  'rgba(0,230,255,1)',
+  'rgba(255,77,255,1)',
+  'rgba(57,255,20,1)',
+  'rgba(255,215,0,1)',
+];
+
+const PASTEL_LIGHT = [
+  'rgba(255, 149, 64, 0.7)',
+  'rgba(64, 186, 255, 0.7)',
+  'rgba(255, 120, 220, 0.7)',
+  'rgba(120, 200, 120, 0.7)',
+  'rgba(246, 208, 80, 0.7)',
+];
+
+function mergeConfig(config: AnimatedBackgroundConfig): Required<AnimatedBackgroundConfig> {
+  return {
+    ...DEFAULT_CONFIG,
+    ...config,
+    quickToSettings: {
+      ...DEFAULT_CONFIG.quickToSettings,
+      ...config.quickToSettings,
+    },
+    colorAnimDuration: {
+      dark: {
+        ...DEFAULT_CONFIG.colorAnimDuration.dark,
+        ...config.colorAnimDuration?.dark,
+      },
+      light: {
+        ...DEFAULT_CONFIG.colorAnimDuration.light,
+        ...config.colorAnimDuration?.light,
+      },
+    },
+    driftSettings: {
+      dark: {
+        ...DEFAULT_CONFIG.driftSettings.dark,
+        ...config.driftSettings?.dark,
+      },
+      light: {
+        ...DEFAULT_CONFIG.driftSettings.light,
+        ...config.driftSettings?.light,
+      },
+      duration: {
+        ...DEFAULT_CONFIG.driftSettings.duration,
+        ...config.driftSettings?.duration,
+      },
+    },
+    repulsionSettings: {
+      radius: {
+        ...DEFAULT_CONFIG.repulsionSettings.radius,
+        ...config.repulsionSettings?.radius,
+      },
+      maxRepel: {
+        ...DEFAULT_CONFIG.repulsionSettings.maxRepel,
+        ...config.repulsionSettings?.maxRepel,
+      },
+      power: config.repulsionSettings?.power ?? DEFAULT_CONFIG.repulsionSettings.power,
+    },
+  };
+}
+
 /**
  * Custom hook for managing animated background effects
  * Handles trail creation, animations, cursor interactions, and cleanup
  */
 export function useAnimatedBackground(
   isDark: boolean,
-  config: AnimatedBackgroundConfig = {}
+  config: AnimatedBackgroundConfig = EMPTY_CONFIG
 ) {
-  // Merge user config with defaults
-  const mergedConfig = { ...DEFAULT_CONFIG, ...config };
+  const configKey = JSON.stringify(config);
+  const mergedConfig = useMemo(() => mergeConfig(config), [config]);
 
   // Background refs
   const sectionRef = useRef<HTMLDivElement | null>(null);
@@ -78,27 +143,11 @@ export function useAnimatedBackground(
   const cursorMoveY = useRef<((v: number) => void) | null>(null);
   const cursorRotateTween = useRef<gsap.core.Tween | null>(null);
 
-  // Color palettes
-  const neonDark = [
-    'rgba(243,140,23,1)',  // orange neon
-    'rgba(0,230,255,1)',   // cyan neon
-    'rgba(255,77,255,1)',  // pink neon
-    'rgba(57,255,20,1)',   // green neon
-    'rgba(255,215,0,1)',   // gold neon
-  ];
-  
-  const pastelLight = [
-    'rgba(255, 149, 64, 0.7)',   // soft orange
-    'rgba(64, 186, 255, 0.7)',   // sky blue
-    'rgba(255, 120, 220, 0.7)',  // soft pink
-    'rgba(120, 200, 120, 0.7)',  // mint
-    'rgba(246, 208, 80, 0.7)',   // warm yellow
-  ];
 
   useEffect(() => {
     if (!bgRef.current || !sectionRef.current) return;
 
-    const colors = isDark ? neonDark : pastelLight;
+    const colors = isDark ? NEON_DARK : PASTEL_LIGHT;
     const blendClass = isDark ? 'mix-blend-screen' : 'mix-blend-multiply';
     const blurPx = isDark ? 12 : 6;
     const baseOpacity = isDark ? 0.85 : 0.55;

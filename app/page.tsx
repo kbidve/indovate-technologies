@@ -1,32 +1,23 @@
-"use client";
-import { motion } from 'framer-motion';
-import Hero from '@/components/Hero';
-import Services from '@/components/Services';
-import ClientLogos from '@/components/ClientLogos';
-import Process from '@/components/Process';
-import Testimonials from '@/components/Testimonials';
-import Contact from '@/components/Contact';
-
+import Hero3DSection from "@/components/home/Hero3DSection";
+import WhatWeBuild from "@/components/home/WhatWeBuild";
+import TrustedClients from "@/components/home/TrustedClients";
+import AICapabilityMap from "@/components/home/AICapabilityMap";
+import EngineeringStrength from "@/components/home/EngineeringStrength";
+import FeaturedWork from "@/components/home/FeaturedWork";
+import DeliveryProcess from "@/components/home/DeliveryProcess";
+import FinalCTA from "@/components/home/FinalCTA";
 
 export default function HomePage() {
   return (
-    <>
-      <Hero />
-      <motion.section className="section container-tight" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once: true }} transition={{ duration: .6 }}>
-        <Services featuredOnly />
-      </motion.section>
-      <motion.section className="section container-tight" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once: true }} transition={{ duration: .6, delay: .1 }}>
-        <ClientLogos />
-      </motion.section>
-      <motion.section className="section container-tight" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once: true }} transition={{ duration: .6, delay: .1 }}>
-        <Process />
-      </motion.section>
-      <motion.section className="section container-tight" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once: true }} transition={{ duration: .6, delay: .1 }}>
-        <Testimonials />
-      </motion.section>
-      <motion.section id="contact" className="section container-tight" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once: true }} transition={{ duration: .6, delay: .1 }}>
-        <Contact />
-      </motion.section>
-    </>
+    <div className="relative overflow-hidden">
+      <Hero3DSection />
+      <WhatWeBuild />
+      <AICapabilityMap />
+      <EngineeringStrength />
+      <FeaturedWork />
+      <DeliveryProcess />
+      <FinalCTA />
+      <TrustedClients />
+    </div>
   );
 }
