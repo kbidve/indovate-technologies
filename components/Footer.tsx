@@ -13,6 +13,10 @@ const companyLinks = [
     href: "/portfolio",
   },
   {
+    label: "Insights",
+    href: "/blog",
+  },
+  {
     label: "How we work",
     href: "/#process",
   },

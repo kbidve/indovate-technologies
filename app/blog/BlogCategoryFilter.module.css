@@ -1,0 +1,145 @@
+.navigation {
+  margin-bottom: 32px;
+}
+
+.navigation h3 {
+  margin: 0 0 20px;
+  color: var(--iv-primary);
+  font-family: var(--font-sans), sans-serif;
+  font-size: 20px;
+  font-weight: 750;
+  line-height: 1.4;
+}
+
+/* Category navigation */
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.filter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-width: 0;
+  max-width: 100%;
+  min-height: 44px;
+  padding: 10px 16px;
+  background: var(--iv-background);
+  color: var(--iv-text);
+  border: 1px solid var(--iv-border);
+  border-radius: 5px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 650;
+  line-height: 1.6;
+  text-align: left;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+  transition:
+    color 150ms ease,
+    border-color 150ms ease,
+    background-color 150ms ease;
+}
+
+.filter:hover {
+  color: var(--iv-accent);
+  border-color: var(--iv-accent);
+}
+
+.filter[aria-pressed="true"] {
+  color: #9a3412;
+  background: #fff7ed;
+  border-color: #c2410c;
+}
+
+.filter:focus-visible {
+  outline: 3px solid var(--iv-accent);
+  outline-offset: 4px;
+}
+
+.count {
+  flex-shrink: 0;
+  font-size: 12px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.85;
+}
+
+/* Article results */
+
+.results {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.activeLabel {
+  margin: 0;
+  color: var(--iv-primary);
+  font-size: 17px;
+  font-weight: 750;
+  line-height: 1.5;
+}
+
+.resultCount {
+  margin: 0;
+  color: var(--iv-muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Automatic dark theme */
+
+@media (prefers-color-scheme: dark) {
+  .filter[aria-pressed="true"] {
+    color: #fdba74;
+    background: #422006;
+    border-color: #fdba74;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 640px) {
+  .navigation {
+    margin-bottom: 26px;
+  }
+
+  .navigation h3 {
+    font-size: 18px;
+  }
+
+  .filters {
+    gap: 8px;
+  }
+
+  .filter {
+    gap: 8px;
+    padding: 9px 12px;
+    font-size: 13px;
+  }
+
+  .activeLabel {
+    font-size: 16px;
+  }
+
+  .resultCount {
+    font-size: 13px;
+  }
+}
+
+/* Reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+  .filter {
+    transition: none;
+  }
+}

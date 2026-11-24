@@ -2,6 +2,8 @@ import Link from "next/link";
 import { FiArrowRight } from "react-icons/fi";
 import type { Metadata } from "next";
 
+import RelatedInsights from "./RelatedInsights";
+
 import styles from "./ServicePage.module.css";
 
 const siteUrl = "https://www.indovatetechnologies.com";
@@ -296,6 +298,8 @@ export default function ServicePage({
 
         </div>
       </section>
+
+      <RelatedInsights serviceSlug={service.slug} />
 
       <section
         className={styles.cta}
