@@ -1,6 +1,16 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+
+  async redirects() {
+    return [
+      {
+        source: "/ai-project-advisor",
+        destination: "/contact",
+        permanent: true,
+      },
+    ];
+  },
   images: {
     remotePatterns: [
       {

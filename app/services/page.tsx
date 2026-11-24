@@ -110,8 +110,8 @@ export default function ServicesPage() {
                 Startups building MVPs, businesses modernizing operations, and teams
                 that want AI capabilities integrated into production software.
               </p>
-              <Link href="/#project-advisor" className="btn-primary mt-6 w-full">
-                Try AI Project Advisor
+              <Link href="/contact" className="btn-primary mt-6 w-full">
+                Discuss Your Project
               </Link>
             </div>
           </div>

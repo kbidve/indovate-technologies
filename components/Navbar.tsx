@@ -9,10 +9,8 @@ import {
   FaArrowRight,
   FaBars,
   FaBrain,
-  FaCodeBranch,
   FaTimes,
 } from "react-icons/fa";
-import { label } from "framer-motion/client";
 
 const navLinks = [
   { href: "/#solutions", label: "Solutions" },
@@ -24,7 +22,6 @@ const navLinks = [
 ];
 
 const mobileQuickLinks = [
-  { href: "/ai-project-advisor", label: "AI Project Advisor" },
   { href: "/#process", label: "Delivery Process" },
   { href: "/services", label: "All Services" },
   { href: "/portfolio", label: "Portfolio" },
@@ -106,13 +103,7 @@ export default function Navbar() {
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
-          <Link
-            href="/ai-project-advisor"
-            className="inline-flex items-center gap-2 rounded-2xl border border-cyan-300/20 bg-cyan-300/10 px-4 py-2.5 text-sm font-semibold text-cyan-700 transition hover:-translate-y-0.5 hover:bg-cyan-300/15 dark:text-cyan-100"
-          >
-            <FaCodeBranch className="text-xs" />
-            AI Advisor
-          </Link>
+
 
           <Link href="/contact" className="btn-primary group text-sm">
             Start a Project
@@ -206,13 +197,7 @@ export default function Navbar() {
             </div>
 
             <div className="mt-auto grid gap-3 pt-8">
-              <Link
-                href="/ai-project-advisor"
-                onClick={closeMenu}
-                className="btn-secondary w-full"
-              >
-                Try AI Advisor
-              </Link>
+
               <Link
                 href="/contact"
                 onClick={closeMenu}

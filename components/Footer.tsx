@@ -24,7 +24,6 @@ const companyLinks = [
 const capabilityLinks = [
   { href: "/#solutions", label: "SaaS & ERP Development" },
   { href: "/#ai-capabilities", label: "RAG & LLM Systems" },
-  { href: "/ai-project-advisor", label: "AI Project Advisor" },
   { href: "/#engineering", label: "Production Engineering" },
   { href: "/#process", label: "Delivery Process" },
 ];

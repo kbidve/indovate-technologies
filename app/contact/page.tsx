@@ -87,8 +87,8 @@ export default function ContactPage() {
               ))}
             </div>
             <div className="mt-8 grid gap-3 sm:grid-cols-2">
-              <Link href="/ai-project-advisor" className="btn-primary">
-                Use AI Advisor
+              <Link href="#contact-form" className="btn-primary">
+                Discuss Your Project
               </Link>
               <a
                 href="mailto:kailas.bidve@indovatetechnologies.com"
@@ -101,7 +101,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <section className="section px-4 sm:px-6 lg:px-8">
+      <section id="contact-form" className="section scroll-mt-28 px-4 sm:px-6 lg:px-8">
         <div className="container-tight">
           <Contact />
         </div>
