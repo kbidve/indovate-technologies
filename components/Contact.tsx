@@ -1,7 +1,9 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { FiArrowRight } from "react-icons/fi";
+
+import styles from "./Contact.module.css";
 
 type FormStatus = "idle" | "sending" | "sent" | "error";
 
@@ -20,24 +22,93 @@ export default function Contact() {
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const submissionLock = useRef(false);
+
+  const onSubmit = async (
+    event: React.FormEvent<HTMLFormElement>
+  ) => {
     event.preventDefault();
 
-    setStatus("sending");
-    setErrorMessage("");
+    if (submissionLock.current) return;
 
     const form = event.currentTarget;
     const formData = new FormData(form);
 
-    const projectType = formData.get("projectType") as string;
-    const message = formData.get("message") as string;
+    const name = String(formData.get("name") ?? "").trim();
+    const email = String(formData.get("email") ?? "").trim();
+    const company = String(formData.get("company") ?? "").trim();
+    const projectType = String(formData.get("projectType") ?? "").trim();
+    const message = String(formData.get("message") ?? "").trim();
+
+    setErrorMessage("");
+
+    const reject = (field: string, error: string) => {
+      setStatus("error");
+      setErrorMessage(error);
+
+      const control = form.elements.namedItem(field);
+
+      if (control instanceof HTMLElement) {
+        control.focus();
+      }
+    };
+
+    if (name.length < 2 || name.length > 120) {
+      reject(
+        "name",
+        "Please enter a name between 2 and 120 characters."
+      );
+      return;
+    }
+
+    if (
+      email.length > 254 ||
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+    ) {
+      reject(
+        "email",
+        "Please enter a valid email address."
+      );
+      return;
+    }
+
+    if (company.length > 160) {
+      reject(
+        "company",
+        "Company name must not exceed 160 characters."
+      );
+      return;
+    }
+
+    if (
+      projectType &&
+      !projectOptions.includes(projectType)
+    ) {
+      reject(
+        "projectType",
+        "Please select a valid project type."
+      );
+      return;
+    }
+
+    if (message.length < 10 || message.length > 5000) {
+      reject(
+        "message",
+        "Project details must contain between 10 and 5,000 characters."
+      );
+      return;
+    }
 
     const payload = {
-      name: formData.get("name") as string,
-      email: formData.get("email") as string,
-      company: formData.get("company") as string,
-      message: projectType ? `Project Type: ${projectType}\n\n${message}` : message,
+      name,
+      email,
+      company,
+      projectType,
+      message,
     };
+
+    submissionLock.current = true;
+    setStatus("sending");
 
     try {
       const response = await fetch("/api/contact", {
@@ -52,167 +123,268 @@ export default function Contact() {
 
       if (!response.ok) {
         setStatus("error");
-        setErrorMessage(result?.error || "Something went wrong. Try again.");
+
+        if (response.status === 429) {
+          setErrorMessage(
+            "Too many requests. Please try again later."
+          );
+        } else if (response.status === 413) {
+          setErrorMessage(
+            "Your inquiry is too large. Please shorten your message."
+          );
+        } else if (response.status === 400) {
+          setErrorMessage(
+            "Please review your details and try again."
+          );
+        } else {
+          setErrorMessage(
+            "We could not confirm your inquiry. Please contact us directly if the problem continues."
+          );
+        }
+
         return;
       }
 
-      setStatus("sent");
+      if (result?.success !== true) {
+        setStatus("error");
+        setErrorMessage(
+          "Submission could not be confirmed. Please contact us directly before submitting again."
+        );
+        return;
+      }
+
       form.reset();
+      setStatus("sent");
+
     } catch {
       setStatus("error");
-      setErrorMessage("Network error. Please try again.");
+      setErrorMessage(
+        "A connection error occurred. We could not confirm your submission. Please contact us directly if needed."
+      );
+    } finally {
+      submissionLock.current = false;
     }
   };
 
   return (
-    <section className="relative overflow-hidden rounded-[2rem] border border-slate-200 bg-white p-4 shadow-glass-light dark:border-white/10 dark:bg-white/[0.04] dark:shadow-glass-dark sm:p-6 lg:p-8">
-      <div className="absolute inset-0 -z-10 bg-gradient-to-br from-cyan-300/10 via-transparent to-brand-500/10" />
-      <div className="absolute right-0 top-0 -z-10 h-64 w-64 rounded-full bg-cyan-300/10 blur-3xl" />
-      <div className="absolute bottom-0 left-0 -z-10 h-72 w-72 rounded-full bg-brand-500/10 blur-3xl" />
+    <section
+      id="contact-form"
+      className={styles.section}
+      aria-labelledby="contact-form-heading"
+    >
+      <div className="iv-container">
 
-      <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
-        <motion.div
-          initial={{ opacity: 0, y: 18 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.55, ease: "easeOut" }}
-          className="rounded-3xl border border-slate-200 bg-slate-50 p-6 dark:border-white/10 dark:bg-slate-950/50"
-        >
-          <span className="text-xs font-bold uppercase tracking-[0.3em] text-brand-600 dark:text-brand-400">
-            Project Intake
-          </span>
-          <h2 className="mt-4 text-3xl font-black leading-tight sm:text-4xl">
-            Share your software or AI project brief.
-          </h2>
-          <p className="mt-4 text-slate-600 dark:text-slate-300">
-            Use this form for SaaS platforms, ERP systems, web applications, AI
-            integrations, RAG systems, LLM copilots, agentic workflows, cloud
-            deployment, or long-term engineering support.
-          </p>
+        <div className={styles.container}>
 
-          <div className="mt-6 grid gap-3 text-sm text-slate-700 dark:text-slate-300">
-            {[
-              "Architecture-first discovery",
-              "Software + AI delivery planning",
-              "Production-focused implementation",
-              "Cloud, DevOps, and support readiness",
-            ].map((item) => (
-              <div
-                key={item}
-                className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3 dark:border-white/10 dark:bg-white/[0.04]"
-              >
-                <span className="h-2 w-2 rounded-full bg-cyan-300 shadow-[0_0_18px_rgba(34,211,238,0.8)]" />
-                <span>{item}</span>
-              </div>
-            ))}
-          </div>
-        </motion.div>
+          <div className={styles.header}>
 
-        <motion.form
-          onSubmit={onSubmit}
-          initial={{ opacity: 0, y: 18 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.25 }}
-          transition={{ duration: 0.55, ease: "easeOut", delay: 0.05 }}
-          className="grid grid-cols-1 gap-4 rounded-3xl border border-slate-200 bg-white/90 p-5 shadow-soft backdrop-blur dark:border-white/10 dark:bg-slate-950/60 sm:p-6 md:grid-cols-2"
-        >
-          <label className="grid gap-2 text-sm font-semibold text-slate-700 dark:text-slate-200">
-            Name
-            <input
-              name="name"
-              required
-              placeholder="Your name"
-              className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-cyan-300 focus:ring-4 focus:ring-cyan-300/10 dark:border-white/10 dark:bg-white/[0.05] dark:text-white"
-            />
-          </label>
+            <p className="iv-section-label">
+              Project Inquiry
+            </p>
 
-          <label className="grid gap-2 text-sm font-semibold text-slate-700 dark:text-slate-200">
-            Email
-            <input
-              name="email"
-              type="email"
-              required
-              placeholder="you@company.com"
-              className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-cyan-300 focus:ring-4 focus:ring-cyan-300/10 dark:border-white/10 dark:bg-white/[0.05] dark:text-white"
-            />
-          </label>
-
-          <label className="grid gap-2 text-sm font-semibold text-slate-700 dark:text-slate-200 md:col-span-2">
-            Company
-            <input
-              name="company"
-              placeholder="Company / startup / organization"
-              className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-cyan-300 focus:ring-4 focus:ring-cyan-300/10 dark:border-white/10 dark:bg-white/[0.05] dark:text-white"
-            />
-          </label>
-
-          <label className="grid gap-2 text-sm font-semibold text-slate-700 dark:text-slate-200 md:col-span-2">
-            Project type
-            <select
-              name="projectType"
-              defaultValue=""
-              className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-slate-950 outline-none transition focus:border-cyan-300 focus:ring-4 focus:ring-cyan-300/10 dark:border-white/10 dark:bg-slate-950 dark:text-white"
+            <h2
+              id="contact-form-heading"
+              className="iv-section-heading"
             >
-              <option value="" disabled>
-                Select closest project type
-              </option>
-              {projectOptions.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
-          </label>
+              Tell us about your project.
+            </h2>
 
-          <label className="grid gap-2 text-sm font-semibold text-slate-700 dark:text-slate-200 md:col-span-2">
-            Project details
-            <textarea
-              name="message"
-              required
-              placeholder="Tell us what you want to build, existing systems, AI requirements, timeline, and any integrations needed."
-              rows={6}
-              className="resize-none rounded-2xl border border-slate-200 bg-white px-4 py-3 text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-cyan-300 focus:ring-4 focus:ring-cyan-300/10 dark:border-white/10 dark:bg-white/[0.05] dark:text-white"
-            />
-          </label>
+            <p className={styles.introduction}>
+              Share your requirements so we can
+              understand your business objectives,
+              technical needs and expected outcomes.
+            </p>
 
-          <div className="flex flex-col gap-3 md:col-span-2 sm:flex-row sm:items-center">
-            <motion.button
-              type="submit"
+            <p className={styles.requiredNote}>
+              Fields marked with an asterisk (*) are required.
+            </p>
+
+          </div>
+
+          <form
+            className={styles.form}
+            onSubmit={onSubmit}
+            method="post"
+            aria-labelledby="contact-form-heading"
+          >
+
+            <fieldset
+              className={styles.fields}
               disabled={status === "sending"}
-              whileHover={{ y: status === "sending" ? 0 : -2 }}
-              whileTap={{ scale: status === "sending" ? 1 : 0.98 }}
-              className="btn-primary disabled:cursor-not-allowed disabled:opacity-60"
             >
-              {status === "sending" ? "Sending..." : "Send Project Brief"}
-            </motion.button>
 
-            <AnimatePresence mode="wait">
-              {status === "error" ? (
-                <motion.span
-                  key="error"
-                  initial={{ opacity: 0, y: 6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -6 }}
-                  className="text-sm font-medium text-red-600 dark:text-red-400"
-                >
-                  {errorMessage || "Something went wrong. Try again."}
-                </motion.span>
-              ) : null}
+              <div className={styles.field}>
 
-              {status === "sent" ? (
-                <motion.span
-                  key="sent"
-                  initial={{ opacity: 0, y: 6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -6 }}
-                  className="text-sm font-medium text-emerald-600 dark:text-emerald-400"
+                <label htmlFor="contact-name">
+                  Full name
+                  <span className={styles.required}> *</span>
+                </label>
+
+                <input
+                  id="contact-name"
+                  name="name"
+                  maxLength={120}
+                  minLength={2}
+                  type="text"
+                  autoComplete="name"
+                  placeholder="Your name"
+                  required
+                />
+
+              </div>
+
+              <div className={styles.field}>
+
+                <label htmlFor="contact-email">
+                  Email address
+                  <span className={styles.required}> *</span>
+                </label>
+
+                <input
+                  id="contact-email"
+                  name="email"
+                  maxLength={254}
+                  type="email"
+                  autoComplete="email"
+                  placeholder="you@company.com"
+                  required
+                />
+
+              </div>
+
+              <div className={styles.fullField}>
+
+                <label htmlFor="contact-company">
+                  Company / organization
+                  <span className={styles.optional}>
+                    {" "}(optional)
+                  </span>
+                </label>
+
+                <input
+                  id="contact-company"
+                  name="company"
+                  maxLength={160}
+                  type="text"
+                  autoComplete="organization"
+                  placeholder="Your company name"
+                />
+
+              </div>
+
+              <div className={styles.fullField}>
+
+                <label htmlFor="contact-project-type">
+                  Project type
+                  <span className={styles.optional}>
+                    {" "}(optional)
+                  </span>
+                </label>
+
+                <select
+                  id="contact-project-type"
+                  name="projectType"
+                  defaultValue=""
                 >
-                  Message sent successfully. We will review your brief.
-                </motion.span>
-              ) : null}
-            </AnimatePresence>
-          </div>
-        </motion.form>
+                  <option value="">
+                    Select your project type
+                  </option>
+
+                  {projectOptions.map((option) => (
+                    <option
+                      key={option}
+                      value={option}
+                    >
+                      {option}
+                    </option>
+                  ))}
+
+                </select>
+
+              </div>
+
+              <div className={styles.fullField}>
+
+                <label htmlFor="contact-message">
+                  Project details
+                  <span className={styles.required}> *</span>
+                </label>
+
+                <textarea
+                  id="contact-message"
+                  name="message"
+                  maxLength={5000}
+                  minLength={10}
+                  rows={7}
+                  required
+                  aria-describedby="contact-message-help"
+                  placeholder="Describe your requirements, business objectives, expected timeline and integrations."
+                />
+
+                <p
+                  id="contact-message-help"
+                  className={styles.help}
+                >
+                  Enter between 10 and 5,000 characters. Please do not include passwords,
+                  API keys or confidential credentials.
+                </p>
+
+              </div>
+
+            </fieldset>
+
+            <div className={styles.actions}>
+
+              <button
+                type="submit"
+                disabled={status === "sending"}
+                className="iv-button-primary"
+              >
+                {status === "sending"
+                  ? "Sending inquiry..."
+                  : "Send Project Inquiry"}
+
+                <FiArrowRight
+                  size={18}
+                  aria-hidden="true"
+                />
+              </button>
+
+            </div>
+
+            <div
+              className={styles.feedback}
+              role="status"
+              aria-live="polite"
+              aria-atomic="true"
+            >
+              {status === "sending" && (
+                <p className={styles.pending}>
+                  Submitting your project inquiry.
+                </p>
+              )}
+
+              {status === "sent" && (
+                <p className={styles.success}>
+                  Your inquiry has been submitted successfully.
+                  Thank you for contacting Indovate Technologies.
+                </p>
+              )}
+            </div>
+
+            {status === "error" && (
+              <p
+                className={styles.error}
+                role="alert"
+              >
+                {errorMessage}
+              </p>
+            )}
+
+          </form>
+
+        </div>
+
       </div>
     </section>
   );

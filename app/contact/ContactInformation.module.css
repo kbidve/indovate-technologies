@@ -1,0 +1,167 @@
+.section {
+  padding-block: 56px;
+  background: var(--iv-surface);
+  color: var(--iv-primary);
+  border-bottom: 1px solid var(--iv-border);
+  scroll-margin-top: 96px;
+}
+
+.header {
+  max-width: 850px;
+  margin-bottom: 32px;
+}
+
+.header h2 {
+  font-size: clamp(30px, 3.5vw, 44px);
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+/* Contact information directory */
+
+.details {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-block: 1px solid var(--iv-border);
+}
+
+.item {
+  min-width: 0;
+  padding: 28px 30px;
+}
+
+.item:first-child {
+  padding-left: 0;
+}
+
+.item:last-child {
+  padding-right: 0;
+}
+
+.item + .item {
+  border-left: 1px solid var(--iv-border);
+}
+
+.icon {
+  display: block;
+  margin-bottom: 20px;
+  color: var(--iv-accent);
+}
+
+.item h3 {
+  margin: 0 0 14px;
+  color: var(--iv-primary);
+  font-family: var(--font-sans), sans-serif;
+  font-size: 20px;
+  font-weight: 750;
+  line-height: 1.4;
+  letter-spacing: -0.025em;
+  overflow-wrap: anywhere;
+}
+
+.item p,
+.address {
+  margin: 0;
+  color: var(--iv-text);
+  font-size: 15px;
+  line-height: 1.85;
+  overflow-wrap: anywhere;
+}
+
+.address {
+  font-style: normal;
+}
+
+/* Contact links */
+
+.email,
+.link {
+  color: var(--iv-accent);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.75;
+}
+
+.email {
+  display: inline-block;
+  max-width: 100%;
+  margin-top: 16px;
+  overflow-wrap: anywhere;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 100%;
+  margin-top: 16px;
+}
+
+.link svg {
+  flex-shrink: 0;
+}
+
+.email:hover,
+.link:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.section a:focus-visible {
+  outline: 3px solid var(--iv-accent);
+  outline-offset: 5px;
+}
+
+/* Tablet */
+
+@media (max-width: 1023px) {
+  .section {
+    padding-block: 48px;
+  }
+
+  .item {
+    padding: 24px 20px;
+  }
+
+  .item h3 {
+    font-size: 18px;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 767px) {
+  .section {
+    padding-block: 36px;
+  }
+
+  .header {
+    margin-bottom: 24px;
+  }
+
+  .details {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .details .item {
+    padding: 24px 0;
+  }
+
+  .item + .item {
+    border-left: 0;
+    border-top: 1px solid var(--iv-border);
+  }
+
+  .icon {
+    margin-bottom: 14px;
+  }
+
+  .item h3 {
+    font-size: 20px;
+  }
+
+  .email,
+  .link {
+    font-size: 14px;
+  }
+}
