@@ -59,7 +59,14 @@ export default function FeaturedWork() {
                 Enterprise Software
               </p>
 
-              <h3>Belsio ERP Platform</h3>
+              <h3>
+                <Link
+                  href="/portfolio#belsio-erp"
+                  className={styles.projectLink}
+                >
+                  Belsio ERP Platform
+                </Link>
+              </h3>
 
             </div>
 
@@ -101,7 +108,14 @@ export default function FeaturedWork() {
                 Artificial Intelligence
               </p>
 
-              <h3>Enterprise AI Companion</h3>
+              <h3>
+                <Link
+                  href="/portfolio#enterprise-ai-companion"
+                  className={styles.projectLink}
+                >
+                  Enterprise AI Companion
+                </Link>
+              </h3>
 
               <p className={styles.note}>
                 Enterprise AI architecture
