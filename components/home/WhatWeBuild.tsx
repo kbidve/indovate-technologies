@@ -6,31 +6,37 @@ import styles from "./WhatWeBuild.module.css";
 const services = [
   {
     title: "Custom software development",
+    href: "/services/custom-software-development",
     description:
       "Business applications, software product development and modernization of existing systems.",
   },
   {
     title: "Artificial intelligence",
+    href: "/services/ai-development",
     description:
       "Generative AI applications, enterprise RAG solutions, intelligent assistants and AI integration.",
   },
   {
     title: "Web & SaaS development",
+    href: "/services/web-saas-development",
     description:
       "Scalable web platforms, customer portals, dashboards and SaaS products.",
   },
   {
     title: "Enterprise solutions",
+    href: "/services/enterprise-solutions",
     description:
       "Custom ERP, CRM and integrated applications that connect business operations.",
   },
   {
     title: "Business process automation",
+    href: "/services/business-automation",
     description:
       "Workflow automation, intelligent document processing and third-party system integrations.",
   },
   {
     title: "Cloud & DevOps",
+    href: "/services/cloud-devops",
     description:
       "Cloud infrastructure, containerization, continuous delivery and application deployment.",
   },
@@ -71,7 +77,14 @@ export default function WhatWeBuild() {
               key={service.title}
               className={styles.service}
             >
-              <h3>{service.title}</h3>
+              <h3>
+                <Link
+                  href={service.href}
+                  className={styles.serviceLink}
+                >
+                  {service.title}
+                </Link>
+              </h3>
               <p>{service.description}</p>
             </li>
           ))}

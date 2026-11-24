@@ -10,7 +10,7 @@ const solutions = [
     description:
       "Turn your business idea into a working digital product. We help teams develop MVPs, SaaS platforms and scalable software applications.",
     linkLabel: "Explore product development",
-    href: "#web-saas-development",
+    href: "/services/web-saas-development",
   },
   {
     audience: "Established businesses",
@@ -18,7 +18,7 @@ const solutions = [
     description:
       "Replace disconnected tools and outdated applications with integrated software, custom ERP systems and streamlined business processes.",
     linkLabel: "Explore enterprise solutions",
-    href: "#enterprise-solutions",
+    href: "/services/enterprise-solutions",
   },
   {
     audience: "Enterprises",
@@ -26,7 +26,7 @@ const solutions = [
     description:
       "Integrate artificial intelligence into existing business systems through enterprise knowledge assistants, document intelligence and workflow automation.",
     linkLabel: "Explore AI development",
-    href: "#ai-development",
+    href: "/services/ai-development",
   },
 ];
 

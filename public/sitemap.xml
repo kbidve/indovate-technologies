@@ -31,4 +31,22 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://www.indovatetechnologies.com/services/custom-software-development</loc>
+  </url>
+  <url>
+    <loc>https://www.indovatetechnologies.com/services/ai-development</loc>
+  </url>
+  <url>
+    <loc>https://www.indovatetechnologies.com/services/web-saas-development</loc>
+  </url>
+  <url>
+    <loc>https://www.indovatetechnologies.com/services/enterprise-solutions</loc>
+  </url>
+  <url>
+    <loc>https://www.indovatetechnologies.com/services/business-automation</loc>
+  </url>
+  <url>
+    <loc>https://www.indovatetechnologies.com/services/cloud-devops</loc>
+  </url>
 </urlset>

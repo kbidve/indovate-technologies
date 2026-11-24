@@ -152,3 +152,20 @@
     padding-top: 4px;
   }
 }
+
+.serviceLink {
+  color: var(--iv-primary);
+  text-decoration: underline;
+  text-decoration-color: var(--iv-border);
+  text-underline-offset: 6px;
+}
+
+.serviceLink:hover {
+  color: var(--iv-accent);
+  text-decoration-color: var(--iv-accent);
+}
+
+.serviceLink:focus-visible {
+  outline: 3px solid var(--iv-accent);
+  outline-offset: 5px;
+}

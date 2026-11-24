@@ -1,4 +1,14 @@
+import Link from "next/link";
 import styles from "./ServiceDirectory.module.css";
+
+const publishedServices = new Set([
+  "custom-software-development",
+  "ai-development",
+  "web-saas-development",
+  "enterprise-solutions",
+  "business-automation",
+  "cloud-devops",
+]);
 
 const services = [
   {
@@ -117,7 +127,16 @@ export default function ServiceDirectory() {
 
               <div className={styles.identity}>
                 <h3 id={`${service.id}-heading`}>
-                  {service.title}
+                  {publishedServices.has(service.id) ? (
+                    <Link
+                      href={`/services/${service.id}`}
+                      className={styles.serviceLink}
+                    >
+                      {service.title}
+                    </Link>
+                  ) : (
+                    service.title
+                  )}
                 </h3>
               </div>
 

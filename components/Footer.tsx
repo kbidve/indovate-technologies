@@ -24,12 +24,28 @@ const companyLinks = [
 
 const expertiseLinks = [
   {
-    label: "Software development",
-    href: "/#solutions",
+    label: "Custom software development",
+    href: "/services/custom-software-development",
   },
   {
-    label: "Artificial intelligence",
-    href: "/#ai-capabilities",
+    label: "AI development",
+    href: "/services/ai-development",
+  },
+  {
+    label: "Web & SaaS development",
+    href: "/services/web-saas-development",
+  },
+  {
+    label: "ERP & enterprise solutions",
+    href: "/services/enterprise-solutions",
+  },
+  {
+    label: "Business automation",
+    href: "/services/business-automation",
+  },
+  {
+    label: "Cloud & DevOps",
+    href: "/services/cloud-devops",
   },
   {
     label: "Engineering expertise",
