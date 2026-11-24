@@ -1,0 +1,672 @@
+:root {
+  --iv-primary: #0f172a;
+  --iv-accent: #c2410c;
+  --iv-accent-hover: #9a3412;
+  --iv-background: #ffffff;
+  --iv-surface: #f8fafc;
+  --iv-text: #475569;
+  --iv-border: #e2e8f0;
+
+  --iv-container: 1280px;
+  --iv-radius: 8px;
+}
+
+.iv-container {
+  width: 100%;
+  max-width: var(--iv-container);
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+.iv-button-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 46px;
+  padding: 12px 22px;
+  border-radius: var(--iv-radius);
+  background: var(--iv-accent);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  transition: background-color 180ms ease;
+}
+
+.iv-button-primary:hover {
+  background: var(--iv-accent-hover);
+  color: #ffffff;
+}
+
+.iv-button-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 12px 22px;
+  border: 1px solid var(--iv-border);
+  border-radius: var(--iv-radius);
+  background: #ffffff;
+  color: var(--iv-primary);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.iv-button-secondary:hover {
+  background: var(--iv-surface);
+}
+
+.iv-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--iv-background);
+  color: var(--iv-primary);
+  border-bottom: 1px solid var(--iv-border);
+}
+
+.iv-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 80px;
+}
+
+.iv-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.iv-brand-name {
+  display: block;
+  color: var(--iv-primary);
+  font-size: 17px;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.iv-brand-caption {
+  display: block;
+  margin-top: 3px;
+  color: var(--iv-text);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.iv-desktop-nav {
+  display: none;
+  align-items: center;
+  gap: 30px;
+}
+
+.iv-nav-link {
+  position: relative;
+  color: var(--iv-primary);
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: color 180ms ease;
+}
+
+.iv-nav-link:hover,
+.iv-nav-link[aria-current="page"] {
+  color: var(--iv-accent);
+}
+
+.iv-header-cta {
+  display: none;
+}
+
+.iv-menu-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--iv-border);
+  border-radius: var(--iv-radius);
+  background: var(--iv-surface);
+  color: var(--iv-primary);
+  cursor: pointer;
+}
+
+.iv-mobile-menu {
+  padding: 16px 24px 24px;
+  border-top: 1px solid var(--iv-border);
+  background: #ffffff;
+}
+
+.iv-mobile-menu[hidden] {
+  display: none;
+}
+
+.iv-mobile-link {
+  display: block;
+  padding: 15px 0;
+  border-bottom: 1px solid var(--iv-border);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.iv-mobile-link[aria-current="page"] {
+  color: var(--iv-accent);
+}
+
+.iv-header a:focus-visible,
+.iv-header button:focus-visible {
+  outline: 3px solid var(--iv-accent);
+  outline-offset: 4px;
+}
+
+@media (min-width: 1024px) {
+  .iv-desktop-nav,
+  .iv-header-cta {
+    display: flex;
+  }
+
+  .iv-menu-button,
+  .iv-mobile-menu {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .iv-container {
+    padding-inline: 16px;
+  }
+
+  .iv-header-inner {
+    min-height: 72px;
+  }
+
+  .iv-brand-name {
+    font-size: 15px;
+  }
+
+  .iv-brand-caption {
+    font-size: 9px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .iv-header *,
+  .iv-button-primary,
+  .iv-button-secondary {
+    transition: none;
+  }
+}
+
+/* ==========================================
+   HOMEPAGE HERO
+   ========================================== */
+
+.iv-expertise {
+  padding: 32px;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  background: #1e293b;
+}
+
+.iv-expertise-heading {
+  margin: 0 0 24px;
+  color: #fdba74;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.iv-expertise-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.iv-expertise-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  padding-block: 22px;
+  border-top: 1px solid #475569;
+}
+
+.iv-expertise-number {
+  flex-shrink: 0;
+  padding-top: 2px;
+  color: #fb923c;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.iv-expertise-item h3 {
+  margin: 0;
+  color: #ffffff;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 18px;
+  line-height: 1.5;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.iv-expertise-item p {
+  margin-top: 6px;
+  color: #cbd5e1;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.iv-expertise-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+  color: #fdba74;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.iv-expertise-link:hover {
+  color: #ffffff;
+}
+
+@media (max-width: 1023px) {
+}
+
+@media (max-width: 640px) {
+
+  .iv-expertise {
+    padding: 22px;
+  }
+
+  .iv-expertise-item {
+    gap: 14px;
+    padding-block: 18px;
+  }
+
+  .iv-expertise-item h3 {
+    font-size: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+}
+
+/* ==========================================
+   REUSABLE SECTION TYPOGRAPHY
+   ========================================== */
+
+.iv-section-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+  color: var(--iv-accent);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.iv-section-label::before {
+  content: "";
+  display: inline-block;
+  width: 24px;
+  height: 2px;
+  flex-shrink: 0;
+  background: var(--iv-accent);
+}
+
+.iv-section-heading {
+  margin: 0;
+  color: var(--iv-primary);
+  font-family: var(--font-sans), sans-serif;
+  font-size: clamp(30px, 3.4vw, 48px);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+.iv-section-description {
+  margin: 0;
+  color: var(--iv-text);
+  font-size: 16px;
+  line-height: 1.85;
+}
+
+/* ==========================================
+   HOMEPAGE SERVICES
+   ========================================== */
+
+@media (max-width: 1023px) {
+}
+
+@media (max-width: 640px) {
+}
+
+@media (prefers-reduced-motion: reduce) {
+}
+
+/* ==========================================
+   CLIENT TRUST AND CREDIBILITY
+   ========================================== */
+
+.iv-clients {
+  padding-block: 64px;
+  background: var(--iv-background);
+  color: var(--iv-primary);
+  border-bottom: 1px solid var(--iv-border);
+}
+
+.iv-clients-intro {
+  max-width: 820px;
+  margin-inline: auto;
+  margin-bottom: 36px;
+  text-align: center;
+}
+
+.iv-clients-intro .iv-section-label {
+  justify-content: center;
+}
+
+.iv-clients-intro .iv-section-heading {
+  font-size: clamp(26px, 2.8vw, 38px);
+}
+
+.iv-clients-intro .iv-section-description {
+  max-width: 680px;
+  margin: 16px auto 0;
+}
+
+.iv-clients-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.iv-client-card {
+  min-width: 0;
+  padding: 20px;
+  border: 1px solid var(--iv-border);
+  border-radius: 10px;
+  background: var(--iv-card);
+  text-align: center;
+  transition: border-color 180ms ease;
+}
+
+.iv-client-card:hover {
+  border-color: var(--iv-accent);
+}
+
+.iv-client-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 90px;
+  padding: 18px;
+  margin-bottom: 18px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  background: #ffffff;
+}
+
+.iv-client-image {
+  display: block;
+  width: 100%;
+  max-width: 170px;
+  height: 54px;
+  object-fit: contain;
+}
+
+.iv-client-card h3 {
+  margin: 0;
+  color: var(--iv-primary);
+  font-family: var(--font-sans), sans-serif;
+  font-size: 17px;
+  font-weight: 800;
+  line-height: 1.5;
+}
+
+.iv-client-card p {
+  margin-top: 8px;
+  color: var(--iv-text);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.iv-clients-bottom {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.iv-client-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--iv-accent);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.iv-client-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+
+.iv-client-link:focus-visible {
+  outline: 3px solid var(--iv-accent);
+  outline-offset: 5px;
+}
+
+@media (max-width: 1023px) {
+  .iv-clients-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .iv-clients {
+    padding-block: 48px;
+  }
+
+  .iv-clients-grid {
+    gap: 12px;
+  }
+
+  .iv-client-card {
+    padding: 12px;
+  }
+
+  .iv-client-logo {
+    height: 76px;
+    padding: 12px;
+  }
+
+  .iv-client-image {
+    height: 44px;
+  }
+
+  .iv-client-card h3 {
+    font-size: 15px;
+  }
+
+  .iv-client-card p {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 360px) {
+  .iv-clients-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .iv-client-card {
+    transition: none;
+  }
+}
+
+/* ==========================================
+   CONTINUOUS CLIENT CAROUSEL
+   ========================================== */
+
+.iv-clients {
+  padding-block: 48px;
+}
+
+.iv-clients-intro {
+  margin-bottom: 24px;
+}
+
+.iv-client-motion {
+  text-align: center;
+}
+
+.iv-client-marquee {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding-block: 8px;
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 4%,
+    #000 96%,
+    transparent
+  );
+}
+
+.iv-client-track {
+  display: flex;
+  width: max-content;
+  animation: iv-client-scroll 28s linear infinite;
+}
+
+.iv-client-group {
+  display: flex;
+  flex-shrink: 0;
+  gap: 20px;
+  margin: 0;
+  padding: 0 20px 0 0;
+  list-style: none;
+}
+
+.iv-client-group .iv-client-card {
+  flex-shrink: 0;
+  width: clamp(250px, 25vw, 320px);
+  padding: 18px;
+}
+
+.iv-client-group .iv-client-logo {
+  height: 80px;
+  margin-bottom: 14px;
+}
+
+.iv-client-group .iv-client-image {
+  max-width: 180px;
+  height: 48px;
+}
+
+.iv-client-group .iv-client-card h3 {
+  font-size: 16px;
+}
+
+.iv-client-group .iv-client-card p {
+  font-size: 13px;
+}
+
+@keyframes iv-client-scroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Pause while the visitor reads a client card */
+
+.iv-client-marquee:hover .iv-client-track {
+  animation-play-state: paused;
+}
+
+/* Mobile layout */
+
+@media (max-width: 640px) {
+  .iv-client-group {
+    gap: 14px;
+    padding-right: 14px;
+  }
+
+  .iv-client-group .iv-client-card {
+    width: 240px;
+    padding: 14px;
+  }
+
+  .iv-client-group .iv-client-logo {
+    height: 72px;
+  }
+}
+
+/* Accessibility: static layout for reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+  .iv-client-track {
+    width: 100%;
+    animation: none;
+  }
+
+  .iv-client-marquee {
+    mask-image: none;
+  }
+
+  .iv-client-group {
+    display: grid;
+    width: 100%;
+    grid-template-columns:
+      repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+    padding: 0;
+  }
+
+  .iv-client-group .iv-client-card {
+    width: 100%;
+  }
+
+  .iv-client-group-duplicate {
+    display: none;
+  }
+}
+
+/* Client carousel finishing touches */
+
+.iv-client-marquee:focus .iv-client-track,
+.iv-client-marquee:focus-within .iv-client-track {
+  animation-play-state: paused;
+}
+
+.iv-client-marquee:focus-visible {
+  outline: 2px solid var(--iv-accent);
+  outline-offset: 4px;
+}
+
+.iv-client-motion {
+  margin-top: 28px;
+}
+
+/* Homepage anchor navigation */
+
+.iv-clients {
+  scroll-margin-top: 96px;
+}
