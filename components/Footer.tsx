@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import CookieConsent from "./CookieConsent";
+
 import styles from "./Footer.module.css";
 
 const companyLinks = [
@@ -205,6 +207,8 @@ export default function Footer() {
           </p>
 
         </div>
+
+        <CookieConsent />
 
       </div>
     </footer>

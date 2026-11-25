@@ -1,0 +1,146 @@
+.page {
+  padding-block: 36px 80px;
+  background: var(--iv-background);
+  color: var(--iv-primary);
+}
+
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 44px;
+  color: var(--iv-muted);
+  font-size: 14px;
+}
+
+.breadcrumb a {
+  color: var(--iv-text);
+}
+
+.breadcrumb a:hover {
+  color: var(--iv-accent);
+  text-decoration: underline;
+}
+
+.header {
+  max-width: 900px;
+  padding-bottom: 36px;
+  border-bottom: 1px solid var(--iv-border);
+}
+
+.header h1 {
+  margin: 18px 0 22px;
+  font-family: var(--font-sans), sans-serif;
+  font-size: clamp(36px, 5vw, 60px);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.04em;
+  overflow-wrap: anywhere;
+}
+
+.introduction {
+  max-width: 760px;
+  margin: 0;
+  color: var(--iv-text);
+  font-size: 18px;
+  line-height: 1.85;
+}
+
+.draftNotice {
+  margin: 24px 0 0;
+  padding: 16px 20px;
+  color: var(--iv-accent);
+  background: var(--iv-surface);
+  border-left: 3px solid var(--iv-accent);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.content {
+  max-width: 900px;
+  color: var(--iv-text);
+  font-size: 16px;
+  line-height: 1.9;
+  overflow-wrap: anywhere;
+}
+
+.content section {
+  margin-top: 36px;
+  scroll-margin-top: 120px;
+}
+
+.content h2 {
+  margin: 0 0 18px;
+  color: var(--iv-primary);
+  font-family: var(--font-sans), sans-serif;
+  font-size: clamp(21px, 3vw, 27px);
+  font-weight: 750;
+  line-height: 1.4;
+}
+
+.content p {
+  margin: 0 0 18px;
+}
+
+.content ul {
+  margin: 18px 0;
+  padding-left: 24px;
+  list-style: disc;
+}
+
+.content li {
+  margin-bottom: 9px;
+}
+
+.content li::marker {
+  color: var(--iv-accent);
+}
+
+.content a:not([class]) {
+  color: var(--iv-accent);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.page a:focus-visible {
+  outline: 3px solid var(--iv-accent);
+  outline-offset: 4px;
+}
+
+.address {
+  font-style: normal;
+  margin-bottom: 24px;
+}
+
+.address strong {
+  display: block;
+  margin-bottom: 12px;
+  color: var(--iv-primary);
+}
+
+@media (max-width: 767px) {
+  .page {
+    padding-block: 24px 48px;
+  }
+
+  .breadcrumb {
+    margin-bottom: 28px;
+  }
+
+  .header h1 {
+    font-size: 36px;
+  }
+
+  .introduction {
+    font-size: 16px;
+  }
+
+  .content {
+    font-size: 15px;
+  }
+
+  .content section {
+    margin-top: 30px;
+  }
+}
