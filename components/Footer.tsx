@@ -1,5 +1,6 @@
-import Image from "next/image";
+import MotionPreference from "./MotionPreference";
 import Link from "next/link";
+import BrandLogo from "./BrandLogo";
 
 import CookieConsent from "./CookieConsent";
 
@@ -75,10 +76,9 @@ export default function Footer() {
             <Link
               href="/"
               className={styles.brand}
-              aria-label="Indovate Technologies homepage"
             >
-              <Image
-                src="/Images/indovate-brand-logo.png"
+              <BrandLogo
+                staticSrc="/Images/indovate-brand-logo.png"
                 alt=""
                 width={44}
                 height={44}
@@ -210,6 +210,9 @@ export default function Footer() {
 
         <CookieConsent />
 
+      </div>
+    <div className="iv-container iv-motion-preference">
+        <MotionPreference />
       </div>
     </footer>
   );

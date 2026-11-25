@@ -1,3 +1,4 @@
+import AIArchitecture from "./AIArchitecture";
 import Link from "next/link";
 import { FiArrowUpRight } from "react-icons/fi";
 
@@ -87,6 +88,10 @@ export default function AICapabilityMap() {
         </div>
 
       </div>
+    <div className="iv-container">
+        <AIArchitecture />
+      </div>
+
     </section>
   );
 }

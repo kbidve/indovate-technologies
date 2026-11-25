@@ -4,6 +4,8 @@ import {
   FiArrowUpRight,
 } from "react-icons/fi";
 
+import AnimatedBrandLogo from "../../components/home/AnimatedBrandLogo";
+
 import styles from "./AboutHero.module.css";
 
 export default function AboutHero() {
@@ -30,7 +32,11 @@ export default function AboutHero() {
           About Indovate Technologies
         </p>
 
-        <h1
+        <div className={styles.brandLayout}>
+
+          <div className={styles.brandCopy}>
+
+            <h1
           id="about-heading"
           className={styles.heading}
         >
@@ -44,6 +50,14 @@ export default function AboutHero() {
           modernization and generative AI integration to build
           maintainable technology aligned with business requirements.
         </p>
+
+          </div>
+
+          <div className={styles.brandVisual}>
+            <AnimatedBrandLogo />
+          </div>
+
+        </div>
 
         <div className={styles.identity}>
 

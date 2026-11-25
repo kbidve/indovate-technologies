@@ -1,0 +1,459 @@
+.hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+
+  padding-block: clamp(64px, 7vw, 106px) 32px;
+
+  background: var(--iv-background);
+  color: var(--iv-primary);
+
+  border-bottom: 1px solid var(--iv-border);
+  scroll-margin-top: 96px;
+}
+
+/* Integrated background across the hero */
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+
+  background:
+    radial-gradient(
+      ellipse at 78% 44%,
+      rgba(37, 99, 235, 0.09),
+      transparent 43%
+    ),
+    radial-gradient(
+      ellipse at 90% 70%,
+      rgba(194, 65, 12, 0.045),
+      transparent 36%
+    );
+
+  pointer-events: none;
+}
+
+/* Main hero layout */
+
+.layout {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.15fr)
+    minmax(0, 0.85fr);
+
+  align-items: center;
+  gap: clamp(24px, 4vw, 64px);
+}
+
+.content {
+  min-width: 0;
+}
+
+.content :global(.iv-section-label) {
+  margin-bottom: 24px;
+}
+
+.headline {
+  margin: 0;
+  max-width: 780px;
+
+  color: var(--iv-primary);
+  font-family: var(--font-sans), sans-serif;
+
+  font-size: clamp(48px, 5.1vw, 80px);
+  font-weight: 800;
+  line-height: 1.06;
+  letter-spacing: -0.055em;
+
+  text-wrap: balance;
+}
+
+.headline span {
+  color: var(--iv-accent);
+}
+
+.description {
+  max-width: 580px;
+  margin: 26px 0 0;
+
+  color: var(--iv-text);
+  font-size: clamp(16px, 1.35vw, 19px);
+  line-height: 1.8;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.actions a {
+  min-height: 52px;
+  padding-inline: 20px;
+}
+
+.actions a:focus-visible,
+.motionControl:focus-visible {
+  outline: 3px solid var(--iv-accent);
+  outline-offset: 4px;
+}
+
+/* Integrated brand visual — no card */
+
+.brandStage {
+  position: relative;
+  isolation: isolate;
+
+  display: grid;
+  place-items: center;
+
+  width: 100%;
+  min-width: 0;
+  min-height: 400px;
+}
+
+/* Soft ambient lighting behind the original logo */
+
+.brandStage::before {
+  content: "";
+  position: absolute;
+  inset: 4%;
+  z-index: -2;
+
+  background: radial-gradient(
+    circle,
+    rgba(30, 64, 175, 0.13) 0%,
+    rgba(59, 130, 246, 0.055) 38%,
+    transparent 72%
+  );
+
+  pointer-events: none;
+}
+
+/* Technical grid gradually fades into the hero */
+
+.brandGrid {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+
+  background-image:
+    linear-gradient(
+      rgba(100, 116, 139, 0.11) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(100, 116, 139, 0.11) 1px,
+      transparent 1px
+    );
+
+  background-size: 30px 30px;
+
+  mask-image: radial-gradient(
+    ellipse,
+    #000 8%,
+    transparent 72%
+  );
+
+  pointer-events: none;
+}
+
+/* Subtle rings surrounding the brand */
+
+.brandOrbit,
+.brandOrbitInner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.brandOrbit {
+  width: min(96%, 430px);
+  border: 1px solid rgba(100, 116, 139, 0.18);
+}
+
+.brandOrbitInner {
+  width: min(82%, 368px);
+  border: 1px dashed rgba(100, 116, 139, 0.22);
+}
+
+/* Original logo — no recoloring or distortion */
+
+.logoWrapper {
+  position: relative;
+  z-index: 1;
+
+  display: grid;
+  place-items: center;
+
+  width: min(62%, 288px);
+  aspect-ratio: 1;
+}
+
+.animatedLogo {
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  aspect-ratio: 1;
+  object-fit: contain;
+}
+
+/* Accessible motion control */
+
+.motionControl {
+  position: absolute;
+  bottom: 0;
+
+  padding: 6px 10px;
+
+  border: 0;
+  background: transparent;
+
+  color: var(--iv-muted);
+  font-family: inherit;
+  font-size: 11px;
+
+  cursor: pointer;
+}
+
+.motionControl:hover {
+  color: var(--iv-accent);
+}
+
+/* Bottom positioning statement */
+
+.bottom {
+  display: flex;
+  flex-wrap: wrap;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 16px;
+
+  margin-top: 56px;
+  padding-top: 22px;
+
+  border-top: 1px solid var(--iv-border);
+
+  color: var(--iv-muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.bottom p {
+  margin: 0;
+}
+
+.specialization {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.specialization span {
+  margin-inline: 4px;
+  color: var(--iv-accent);
+}
+
+/* Automatic dark theme */
+
+@media (prefers-color-scheme: dark) {
+  .hero::before {
+    background:
+      radial-gradient(
+        ellipse at 79% 45%,
+        rgba(30, 64, 120, 0.24),
+        transparent 46%
+      ),
+      radial-gradient(
+        ellipse at 90% 70%,
+        rgba(251, 146, 60, 0.045),
+        transparent 35%
+      );
+  }
+
+  .brandStage::before {
+    background: radial-gradient(
+      circle,
+      rgba(20, 50, 90, 0.65),
+      rgba(20, 50, 90, 0.18) 45%,
+      transparent 72%
+    );
+  }
+
+  .brandOrbit {
+    border-color: rgba(148, 163, 184, 0.14);
+  }
+
+  .brandOrbitInner {
+    border-color: rgba(148, 163, 184, 0.18);
+  }
+}
+
+/* Tablet */
+
+@media (max-width: 1023px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 30px;
+  }
+
+  .headline {
+    font-size: clamp(42px, 7vw, 72px);
+  }
+
+  .brandStage {
+    max-width: 500px;
+    min-height: 380px;
+    margin-inline: auto;
+  }
+
+  .bottom {
+    margin-top: 36px;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 640px) {
+  .hero {
+    padding-block: 44px 24px;
+  }
+
+  .headline {
+    font-size: clamp(36px, 8.6vw, 48px);
+    letter-spacing: -0.045em;
+  }
+
+  .content :global(.iv-section-label) {
+    margin-bottom: 18px;
+  }
+
+  .description {
+    margin-top: 20px;
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+  .actions {
+    margin-top: 24px;
+  }
+
+  .actions a {
+    width: 100%;
+  }
+
+  .brandStage {
+    min-height: 300px;
+    max-width: 320px;
+  }
+
+  .logoWrapper {
+    width: min(64%, 220px);
+  }
+
+  .bottom {
+    margin-top: 26px;
+    padding-top: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motionControl {
+    display: none;
+  }
+}
+
+/* Final animated branding refinements */
+
+.brandStage {
+  min-height: 440px;
+}
+
+.logoWrapper {
+  width: min(82%, 380px);
+}
+
+.animatedLogo {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: contain;
+}
+
+.brandOrbit,
+.brandOrbitInner,
+.motionControl {
+  display: none;
+}
+
+/* Ambient background without visible rings */
+
+.brandStage::before {
+  inset: 0;
+
+  background: radial-gradient(
+    ellipse,
+    rgba(37, 99, 235, 0.12),
+    rgba(37, 99, 235, 0.035) 45%,
+    transparent 75%
+  );
+}
+
+@media (prefers-color-scheme: dark) {
+  .brandStage::before {
+    background: radial-gradient(
+      ellipse,
+      rgba(20, 50, 90, 0.65),
+      rgba(20, 50, 90, 0.18) 45%,
+      transparent 75%
+    );
+  }
+}
+
+@media (max-width: 1023px) {
+  .brandStage {
+    min-height: 380px;
+  }
+
+  .logoWrapper {
+    width: min(78%, 320px);
+  }
+}
+
+@media (max-width: 640px) {
+  .brandStage {
+    min-height: 280px;
+  }
+
+  .logoWrapper {
+    width: min(80%, 250px);
+  }
+}
+
+/* Compact hero ending */
+
+.hero {
+  padding-bottom: clamp(40px, 5vw, 64px);
+}
+
+@media (max-width: 640px) {
+  .hero {
+    padding-bottom: 32px;
+  }
+}

@@ -202,3 +202,55 @@
     white-space: normal;
   }
 }
+
+/* Integrated animated company branding */
+
+.brandLayout {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.4fr)
+    minmax(0, 0.8fr);
+
+  align-items: center;
+
+  gap: clamp(24px, 4vw, 64px);
+}
+
+.brandCopy,
+.brandVisual {
+  min-width: 0;
+}
+
+.brandVisual {
+  display: grid;
+  place-items: center;
+  align-self: stretch;
+}
+
+.brandCopy .heading {
+  max-width: none;
+}
+
+.brandCopy .description {
+  max-width: none;
+}
+
+@media (max-width: 1023px) {
+  .brandLayout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+
+  .brandVisual {
+    width: 100%;
+    max-width: 500px;
+    margin-inline: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .brandLayout {
+    gap: 12px;
+  }
+}

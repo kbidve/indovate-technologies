@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { FiArrowUpRight } from "react-icons/fi";
-
+import { FiArrowRight, FiArrowUpRight } from "react-icons/fi";
 import styles from "./WhatWeBuild.module.css";
 
 const services = [
@@ -51,60 +50,64 @@ export default function WhatWeBuild() {
     >
       <div className="iv-container">
 
-        <div className={styles.header}>
-          <p className="iv-section-label">
-            Our Services
-          </p>
+        <div className={styles.sectionHeader}>
+          <div>
+            <p className="iv-section-label">
+              Our services
+            </p>
 
-          <h2
-            id="services-heading"
-            className="iv-section-heading"
-          >
-            Software development and AI services.
-          </h2>
+            <h2
+              id="services-heading"
+              className="iv-section-heading"
+            >
+              Software development and AI services.
+            </h2>
+          </div>
 
           <p className="iv-section-description">
             End-to-end software engineering services for businesses
-             building digital products, modernizing enterprise systems
-             and adopting artificial intelligence.
+            building digital products, modernizing enterprise systems
+            and adopting artificial intelligence.
           </p>
         </div>
 
-        <ul className={styles.services}>
-
-          {services.map((service) => (
+        <ul className={styles.serviceGrid}>
+          {services.map((service, index) => (
             <li
-              key={service.title}
+              key={service.href}
               className={styles.service}
             >
-              <h3>
-                <Link
-                  href={service.href}
-                  className={styles.serviceLink}
-                >
-                  {service.title}
-                </Link>
-              </h3>
-              <p>{service.description}</p>
+              <Link
+                href={service.href}
+                className={styles.serviceLink}
+              >
+                <div className={styles.serviceTop}>
+                  <span className={styles.serviceNumber}>
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+
+                  <FiArrowUpRight
+                    size={22}
+                    className={styles.serviceArrow}
+                    aria-hidden="true"
+                  />
+                </div>
+
+                <h3>{service.title}</h3>
+                <p>{service.description}</p>
+              </Link>
             </li>
           ))}
-
         </ul>
 
         <div className={styles.bottom}>
-
           <Link
             href="/services"
-            className={styles.link}
+            className={styles.exploreLink}
           >
             Explore all services
-
-            <FiArrowUpRight
-              size={20}
-              aria-hidden="true"
-            />
+            <FiArrowRight size={18} aria-hidden="true" />
           </Link>
-
         </div>
 
       </div>

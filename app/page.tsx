@@ -58,8 +58,11 @@ export default function HomePage() {
       <AICapabilityMap />
       <EngineeringStrength />
       <DeliveryProcess />
-      <FinalCTA />
       <TrustedClients />
+
+      <div className="iv-home-closing-cta">
+        <FinalCTA />
+      </div>
     </div>
   );
 }

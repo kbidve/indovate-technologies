@@ -670,3 +670,263 @@
 .iv-clients {
   scroll-margin-top: 96px;
 }
+
+
+/* Homepage closing sections redesign */
+
+/* Client relationships */
+
+.iv-clients {
+  padding-block: clamp(52px, 6vw, 84px);
+  background: var(--iv-background);
+  border-top: 1px solid var(--iv-border);
+}
+
+.iv-clients-intro {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.iv-client-group .iv-client-card {
+  padding: 20px;
+  border-radius: 10px;
+
+  background: var(--iv-surface);
+
+  transition:
+    background-color 220ms ease,
+    border-color 220ms ease;
+}
+
+.iv-client-group .iv-client-card:hover {
+  border-color: var(--iv-accent);
+  background: var(--iv-card);
+}
+
+/* Preserve original client artwork and colors */
+
+.iv-client-group .iv-client-logo {
+  height: 96px;
+  padding: 20px;
+  margin-bottom: 16px;
+
+  background: #ffffff;
+  border-radius: 6px;
+}
+
+.iv-client-group .iv-client-image {
+  max-width: 190px;
+  height: 54px;
+  object-fit: contain;
+}
+
+.iv-client-group .iv-client-card h3 {
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.iv-client-group .iv-client-card p {
+  line-height: 1.7;
+}
+
+/* Final project inquiry section */
+
+.iv-home-closing-cta {
+  position: relative;
+  isolation: isolate;
+
+  background: var(--iv-surface);
+  border-top: 1px solid var(--iv-border);
+}
+
+.iv-home-closing-cta > section {
+  position: relative;
+
+  padding-block: clamp(64px, 8vw, 116px);
+
+  background:
+    radial-gradient(
+      ellipse at 85% 40%,
+      rgba(37, 99, 235, 0.08),
+      transparent 58%
+    ),
+    radial-gradient(
+      ellipse at 100% 100%,
+      rgba(194, 65, 12, 0.06),
+      transparent 50%
+    ),
+    var(--iv-surface);
+}
+
+.iv-home-closing-cta h2 {
+  color: var(--iv-primary);
+  font-size: clamp(36px, 5vw, 68px);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
+
+.iv-home-closing-cta p {
+  line-height: 1.8;
+}
+
+.iv-home-closing-cta .iv-button-primary {
+  min-height: 54px;
+  padding-inline: 24px;
+
+  transition:
+    background-color 200ms ease,
+    transform 200ms ease;
+}
+
+.iv-home-closing-cta a:focus-visible {
+  outline: 3px solid var(--iv-accent);
+  outline-offset: 5px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .iv-home-closing-cta .iv-button-primary:hover {
+    transform: translateY(-2px);
+  }
+}
+
+/* Automatic dark theme */
+
+@media (prefers-color-scheme: dark) {
+  .iv-home-closing-cta > section {
+    background:
+      radial-gradient(
+        ellipse at 85% 40%,
+        rgba(30, 64, 120, 0.28),
+        transparent 58%
+      ),
+      radial-gradient(
+        ellipse at 100% 100%,
+        rgba(251, 146, 60, 0.06),
+        transparent 50%
+      ),
+      var(--iv-surface);
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 640px) {
+  .iv-clients {
+    padding-block: 44px;
+  }
+
+  .iv-clients-intro {
+    margin-bottom: 22px;
+  }
+
+  .iv-client-group .iv-client-card {
+    padding: 14px;
+  }
+
+  .iv-client-group .iv-client-logo {
+    height: 80px;
+    padding: 14px;
+  }
+
+  .iv-home-closing-cta > section {
+    padding-block: 52px;
+  }
+
+  .iv-home-closing-cta h2 {
+    font-size: clamp(32px, 8vw, 44px);
+  }
+
+  .iv-home-closing-cta .iv-button-primary {
+    width: 100%;
+  }
+}
+
+/* Respect reduced-motion preferences */
+
+@media (prefers-reduced-motion: reduce) {
+  .iv-client-group .iv-client-card,
+  .iv-home-closing-cta .iv-button-primary {
+    transition: none;
+  }
+
+  .iv-home-closing-cta .iv-button-primary:hover {
+    transform: none;
+  }
+}
+
+
+/* Mobile navigation and consent coordination */
+
+@media (max-width: 1199px) {
+  body:has(
+    button[aria-controls="mobile-navigation"][aria-expanded="true"]
+  ) #cookie-consent {
+    display: none;
+  }
+}
+
+/* Website animation preference */
+
+.iv-motion-preference {
+  display: flex;
+  justify-content: flex-end;
+  padding-block: 12px 20px;
+}
+
+#iv-motion-toggle {
+  min-height: 44px;
+  padding: 8px 14px;
+
+  color: var(--iv-primary);
+  background: var(--iv-surface);
+
+  border: 1px solid var(--iv-border);
+  border-radius: 6px;
+
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#iv-motion-toggle[aria-pressed="true"] {
+  color: var(--iv-accent);
+  border-color: var(--iv-accent);
+}
+
+#iv-motion-toggle:focus-visible {
+  outline: 3px solid var(--iv-accent);
+  outline-offset: 4px;
+}
+
+body:has(#iv-motion-toggle[aria-pressed="true"])
+.iv-client-track {
+  animation: none;
+  transform: none;
+  width: 100%;
+}
+
+body:has(#iv-motion-toggle[aria-pressed="true"])
+.iv-client-marquee {
+  mask-image: none;
+}
+
+body:has(#iv-motion-toggle[aria-pressed="true"])
+.iv-client-group {
+  display: grid;
+  width: 100%;
+  grid-template-columns:
+    repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+  padding: 0;
+}
+
+body:has(#iv-motion-toggle[aria-pressed="true"])
+.iv-client-group .iv-client-card {
+  width: 100%;
+}
+
+body:has(#iv-motion-toggle[aria-pressed="true"])
+.iv-client-group-duplicate {
+  display: none;
+}
