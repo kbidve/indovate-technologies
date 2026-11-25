@@ -6,14 +6,15 @@ import EngineeringWork from "./EngineeringWork";
 import PortfolioCTA from "./PortfolioCTA";
 import PortfolioStructuredData from "./PortfolioStructuredData";
 
+const description = "Explore our software development portfolio, featuring representative ERP platforms, enterprise AI systems, SaaS applications and business automation.";
+
 export const metadata: Metadata = {
   title: {
     absolute:
       "Software & AI Engineering Portfolio | Indovate Technologies",
   },
 
-  description:
-    "Explore Indovate Technologies' representative work across custom ERP platforms, enterprise AI, SaaS applications and business automation.",
+  description,
 
   alternates: {
     canonical: "/portfolio",
@@ -23,8 +24,7 @@ export const metadata: Metadata = {
     title:
       "Software & AI Engineering Portfolio | Indovate Technologies",
 
-    description:
-      "Explore our work across enterprise software, AI systems, digital products and business automation.",
+    description,
 
     url: "/portfolio",
     siteName: "Indovate Technologies",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
 
     images: [
       {
-        url: "/Images/indovatelogo.png",
+        url: "/Images/indovate-brand-logo.png",
         alt: "Indovate Technologies",
       },
     ],
@@ -44,10 +44,9 @@ export const metadata: Metadata = {
     title:
       "Software & AI Engineering Portfolio | Indovate Technologies",
 
-    description:
-      "Representative enterprise software, AI and digital product engineering work.",
+    description,
 
-    images: ["/Images/indovatelogo.png"],
+    images: ["/Images/indovate-brand-logo.png"],
   },
 };
 

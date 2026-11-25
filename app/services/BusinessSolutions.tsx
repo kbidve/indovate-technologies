@@ -8,24 +8,24 @@ const solutions = [
     audience: "Startups & product teams",
     title: "Build your next product.",
     description:
-      "Turn your business idea into a working digital product. We help teams develop MVPs, SaaS platforms and scalable software applications.",
-    linkLabel: "Explore product development",
+      "Build your next digital product through MVP development, custom web applications and SaaS product engineering tailored to your users and business model.",
+    linkLabel: "Explore web and SaaS development",
     href: "/services/web-saas-development",
   },
   {
     audience: "Established businesses",
     title: "Modernize your operations.",
     description:
-      "Replace disconnected tools and outdated applications with integrated software, custom ERP systems and streamlined business processes.",
-    linkLabel: "Explore enterprise solutions",
+      "Modernize existing applications and connect business operations through custom ERP development, enterprise software integration and workflow automation.",
+    linkLabel: "Explore ERP and enterprise solutions",
     href: "/services/enterprise-solutions",
   },
   {
     audience: "Enterprises",
     title: "Put AI to work.",
     description:
-      "Integrate artificial intelligence into existing business systems through enterprise knowledge assistants, document intelligence and workflow automation.",
-    linkLabel: "Explore AI development",
+      "Integrate generative AI into enterprise applications through RAG systems, intelligent assistants, AI agents and document processing workflows.",
+    linkLabel: "Explore generative AI development",
     href: "/services/ai-development",
   },
 ];

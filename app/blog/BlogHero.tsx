@@ -30,16 +30,15 @@ export default function BlogHero() {
           id="blog-heading"
           className={styles.heading}
         >
-          Technology insights for better
-          business decisions.
+          Software engineering and AI insights.
         </h1>
 
         <p className={styles.description}>
-          Practical perspectives on software engineering,
-          artificial intelligence, enterprise systems
-          and digital transformation. Explore technology
-          approaches that connect engineering decisions
-          with real business requirements.
+          Explore practical guides on custom software development,
+          generative AI, enterprise RAG systems, SaaS development,
+          ERP solutions, business automation and cloud engineering.
+          Understand the technical decisions involved in building
+          and modernizing business software.
         </p>
 
       </div>

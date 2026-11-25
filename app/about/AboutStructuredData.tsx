@@ -10,17 +10,15 @@ const schemas = [
     name: "About Indovate Technologies",
 
     description:
-      "Learn about Indovate Technologies, an India-based software and AI engineering company focused on custom software, enterprise applications and technology services for businesses worldwide.",
+      "Indovate Technologies is an India-based software and AI engineering company providing custom software and enterprise technology services worldwide.",
 
     url: pageUrl,
 
     inLanguage: "en",
 
-    about: {
-      "@type": "Organization",
-      name: "Indovate Technologies",
-      url: siteUrl,
-    },
+    isPartOf: {"@id": `${siteUrl}/#website`},
+
+    about: {"@id": `${siteUrl}/#organization`},
 
     breadcrumb: {
       "@id": `${pageUrl}#breadcrumb`,

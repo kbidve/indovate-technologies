@@ -16,18 +16,9 @@ const schemas = [
 
     inLanguage: "en",
 
-    mainEntity: {
-      "@type": "Organization",
-      name: "Indovate Technologies",
-      url: siteUrl,
+    isPartOf: {"@id": `${siteUrl}/#website`},
 
-      contactPoint: {
-        "@type": "ContactPoint",
-        email: "kailas.bidve@indovatetechnologies.com",
-        contactType: "business inquiries",
-        availableLanguage: "English",
-      },
-    },
+    mainEntity: {"@id": `${siteUrl}/#organization`},
 
     breadcrumb: {
       "@id": `${pageUrl}#breadcrumb`,

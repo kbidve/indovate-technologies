@@ -4,6 +4,7 @@ const siteUrl =
 const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
+  "@id": `${siteUrl}/services#breadcrumb`,
   itemListElement: [
     {
       "@type": "ListItem",

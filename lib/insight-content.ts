@@ -16,7 +16,7 @@ export const initialInsights: readonly PublishedInsight[] = [
       "Custom Software vs. Off-the-Shelf Software",
 
     seoDescription:
-      "Compare custom and off-the-shelf software using business requirements, total ownership costs, integrations, scalability and maintenance.",
+      "Compare custom software vs. off-the-shelf software based on business requirements, development costs, integrations, scalability and maintenance.",
 
     category: "custom-software",
 
@@ -153,7 +153,7 @@ export const initialInsights: readonly PublishedInsight[] = [
       "RAG for Enterprise Knowledge Management",
 
     seoDescription:
-      "Learn how enterprise RAG systems retrieve internal knowledge, generate grounded answers, enforce access controls and support business workflows.",
+      "Learn how RAG supports enterprise knowledge management through document retrieval, context-grounded AI answers and appropriate access controls.",
 
     category: "enterprise-ai",
 

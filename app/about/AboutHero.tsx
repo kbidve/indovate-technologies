@@ -34,16 +34,15 @@ export default function AboutHero() {
           id="about-heading"
           className={styles.heading}
         >
-          An engineering partner for your digital future.
+          Your software and AI engineering partner.
         </h1>
 
         <p className={styles.description}>
-          We bring software engineering and artificial
-          intelligence together to build practical,
-          maintainable technology for businesses worldwide.
-          From new software products to enterprise
-          modernization, we focus on solutions aligned
-          with real business requirements.
+          Indovate Technologies is a software and AI engineering
+          company based in India, working with businesses worldwide.
+          We combine software product development, enterprise
+          modernization and generative AI integration to build
+          maintainable technology aligned with business requirements.
         </p>
 
         <div className={styles.identity}>

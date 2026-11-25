@@ -8,52 +8,52 @@ const service: ServicePageData = {
 
   name: "Business Process Automation",
 
-  seoTitle: "Business Process Automation & AI Workflow Services",
+  seoTitle: "Business Process Automation Services",
 
   seoDescription:
-    "Automate business processes, document workflows, application integrations and repetitive operations with custom software and AI solutions from Indovate Technologies.",
+    "Business process automation services for AI workflows, document processing, approval systems, application integration and repetitive operational tasks.",
 
   headline:
-    "Simplify business operations through intelligent automation.",
+    "Business process automation with software and AI.",
 
   introduction:
-    "We develop custom automation solutions that connect business applications, streamline operational workflows and reduce repetitive manual tasks. Our approach combines conventional software automation with artificial intelligence where it adds practical value to your business processes.",
+    "We provide business process automation services that streamline operational workflows, reduce repetitive manual tasks and connect existing business applications. Our solutions combine rule-based software automation with AI-powered workflows where appropriate, with a focus on reliability, monitoring and human oversight.",
 
   offerings: [
     {
       title: "Business workflow automation",
       description:
-        "Develop automated workflows for internal requests, task assignments, notifications, operational activities and information exchange between departments.",
+        "Automate business workflows for internal requests, task assignments, notifications, operational activities and information exchange between departments.",
     },
     {
-      title: "AI agents & workflow orchestration",
+      title: "AI workflow automation & orchestration",
       description:
-        "Build controlled AI-powered workflows that retrieve information, execute approved tools and coordinate multi-step business processes.",
+        "Develop AI-powered automation workflows using tools such as LangChain and LangGraph to retrieve information, execute approved tools and coordinate multi-step business processes.",
     },
     {
-      title: "Document processing automation",
+      title: "Intelligent document processing",
       description:
-        "Automate document ingestion, classification, information extraction, summarization and routing into relevant business applications.",
+        "Automate document processing for invoices, reports and business records through document ingestion, classification, information extraction, summarization and application integration.",
     },
     {
-      title: "API & application integrations",
+      title: "Business application integration",
       description:
-        "Connect existing software, third-party services, databases and business platforms through structured APIs and automated data exchange.",
+        "Connect ERP systems, CRM platforms, existing applications and third-party services through REST APIs, webhooks and automated data exchange.",
     },
     {
-      title: "Approval & decision workflows",
+      title: "Automated approval workflows",
       description:
-        "Implement business rules, approval sequences, human review checkpoints and escalation mechanisms according to organizational requirements.",
+        "Automate approval processes using business rules, approval sequences, human review checkpoints and escalation mechanisms aligned with organizational requirements.",
     },
     {
       title: "Scheduled tasks & background processing",
       description:
-        "Automate recurring operations, scheduled reports, data synchronization and background processing using appropriate task queues and scheduling mechanisms.",
+        "Automate recurring operations, scheduled reporting, data synchronization and background processing using task queues and scheduling tools such as Celery and Redis.",
     },
     {
       title: "Workflow monitoring & audit trails",
       description:
-        "Incorporate execution tracking, error handling, retry mechanisms and audit records to help teams monitor and maintain automated business processes.",
+        "Implement workflow monitoring, execution tracking, error handling, retry mechanisms and audit trails to help teams maintain reliable business automation systems.",
     },
   ],
 
@@ -119,10 +119,10 @@ const service: ServicePageData = {
   ],
 
   ctaTitle:
-    "Which business processes would you like to automate?",
+    "Looking to automate your business processes?",
 
   ctaDescription:
-    "Share your existing workflows, repetitive tasks and operational challenges. We can help you identify suitable automation opportunities and define an implementation approach.",
+    "Share your existing workflows, business applications and repetitive operational tasks. We can help you identify suitable software automation, AI workflow integration and business process improvement opportunities.",
 };
 
 export const metadata = createServiceMetadata(service);

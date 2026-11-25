@@ -3,6 +3,7 @@ const siteUrl = "https://www.indovatetechnologies.com";
 const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
+  "@id": `${siteUrl}/portfolio#breadcrumb`,
 
   itemListElement: [
     {

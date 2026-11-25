@@ -25,9 +25,9 @@ export default function HomeHero() {
           <div className={styles.content}>
 
             <p>
-              We help businesses build new digital products,
-              modernize existing software systems and integrate
-              artificial intelligence into their operations.
+              We build custom business applications, SaaS products
+               and enterprise software, modernize existing systems
+               and integrate generative AI into business operations.
             </p>
 
             <div className={styles.actions}>

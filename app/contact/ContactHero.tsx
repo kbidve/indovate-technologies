@@ -35,10 +35,11 @@ export default function ContactHero() {
         </h1>
 
         <p className={styles.description}>
-          Tell us about your business requirements,
-          your next software product or the technology
-          challenges you want to solve. We can explore
-          the right engineering approach together.
+          Contact our team to discuss custom software development,
+          SaaS products, ERP systems, generative AI integration
+          or business process automation. Share your project
+          requirements so we can explore a suitable
+          engineering approach.
         </p>
 
         <div className={styles.actions}>

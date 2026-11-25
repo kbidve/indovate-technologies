@@ -11,39 +11,39 @@ const service: ServicePageData = {
   seoTitle: "Custom Software Development Services",
 
   seoDescription:
-    "Custom software development services from Indovate Technologies. Build business applications, modernize existing software and develop scalable backend systems.",
+    "Custom software development services for business applications, product engineering, legacy modernization, backend systems and API integration.",
 
   headline:
-    "Custom software built around your business.",
+    "Custom software development built around your business.",
 
   introduction:
-    "We design, develop and modernize software applications tailored to your business requirements. From new product engineering to improving existing systems, we help organizations build maintainable software that supports their operations and growth.",
+    "We provide custom software development services for businesses building digital products, modernizing legacy applications and integrating enterprise systems. Our engineering capabilities cover frontend applications, backend development, REST APIs and database integrations. We focus on maintainable software aligned with your business requirements and long-term objectives.",
 
   offerings: [
     {
-      title: "Custom business applications",
+      title: "Custom business application development",
       description:
-        "Develop applications around your actual business processes, including internal management systems, operational tools, reporting platforms and role-based workflows.",
+        "Design and develop custom business applications around your operational requirements, including internal management systems, reporting platforms, administrative portals and role-based workflows.",
     },
     {
       title: "Software product engineering",
       description:
-        "Turn product requirements into working software through architecture planning, frontend development, backend engineering, testing and deployment.",
+        "Build software products through requirements analysis, architecture planning, frontend development, backend engineering, integration, testing and production deployment.",
     },
     {
-      title: "Application modernization",
+      title: "Legacy application modernization",
       description:
-        "Improve existing software by reviewing its architecture, replacing outdated components, extending functionality and addressing maintainability requirements.",
+        "Modernize legacy software systems by reviewing existing architecture, replacing outdated components, improving application maintainability and integrating newer technologies.",
     },
     {
       title: "Backend & API development",
       description:
-        "Build backend services, REST APIs and database integrations that connect applications and support reliable business operations.",
+        "Develop backend services using Python, Django and FastAPI, with REST APIs, database integrations and application architecture designed around business requirements.",
     },
     {
-      title: "Software integration",
+      title: "Enterprise software integration",
       description:
-        "Connect existing applications, third-party services and business data through structured integrations that reduce disconnected workflows.",
+        "Connect enterprise applications, third-party APIs and business data through structured software integrations that improve information exchange and reduce disconnected workflows.",
     },
   ],
 
@@ -105,7 +105,7 @@ const service: ServicePageData = {
   ],
 
   ctaTitle:
-    "Have a software development project in mind?",
+    "Looking for a custom software development partner?",
 
   ctaDescription:
     "Share your requirements, existing systems and business objectives. We can help you explore a suitable software development approach.",

@@ -11,9 +11,7 @@ type ArticleStructuredDataProps = {
 };
 
 const organization = {
-  "@type": "Organization",
-  name: "Indovate Technologies",
-  url: siteUrl,
+  "@id": `${siteUrl}/#organization`,
 };
 
 export default function ArticleStructuredData({
@@ -47,14 +45,7 @@ export default function ArticleStructuredData({
 
       author: organization,
 
-      publisher: {
-        ...organization,
-
-        logo: {
-          "@type": "ImageObject",
-          url: `${siteUrl}/Images/indovatelogo.png`,
-        },
-      },
+      publisher: organization,
 
       mainEntityOfPage: {
         "@id": `${pageUrl}#webpage`,

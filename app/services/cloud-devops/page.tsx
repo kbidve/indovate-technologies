@@ -8,52 +8,52 @@ const service: ServicePageData = {
 
   name: "Cloud & DevOps",
 
-  seoTitle: "Cloud Engineering & DevOps Services",
+  seoTitle: "Cloud & DevOps Consulting Services",
 
   seoDescription:
-    "Cloud engineering and DevOps services for application deployment, CI/CD automation, containerization, infrastructure and production monitoring from Indovate Technologies.",
+    "Cloud and DevOps services for AWS and Azure deployment, CI/CD automation, Docker, Kubernetes, infrastructure modernization and application monitoring.",
 
   headline:
-    "Cloud infrastructure built for reliable software delivery.",
+    "Cloud and DevOps services for reliable software delivery.",
 
   introduction:
-    "We help businesses deploy, operate and improve software applications through cloud engineering and DevOps practices. Our approach focuses on maintainable infrastructure, automated delivery, application reliability and deployment environments aligned with your business requirements.",
+    "We help businesses deploy, operate and modernize software through cloud engineering and DevOps services. Our capabilities include cloud infrastructure, CI/CD automation, containerization and application monitoring, with a focus on reliable software delivery and maintainable production environments.",
 
   offerings: [
     {
       title: "Cloud application deployment",
       description:
-        "Configure cloud environments for web applications, backend services, enterprise software and AI-powered applications based on workload and infrastructure requirements.",
+        "Deploy web applications, SaaS products, backend services and enterprise AI applications on cloud platforms such as AWS and Microsoft Azure, based on workload and infrastructure requirements.",
     },
     {
-      title: "CI/CD pipeline development",
+      title: "CI/CD pipeline development & automation",
       description:
-        "Implement continuous integration and continuous delivery workflows that automate application builds, testing and deployment across development and production environments.",
+        "Implement continuous integration and continuous delivery (CI/CD) pipelines using tools such as GitHub Actions to automate application builds, testing and deployment across development, staging and production environments.",
     },
     {
-      title: "Containerization & orchestration",
+      title: "Docker & Kubernetes deployment",
       description:
-        "Package applications using containers and configure suitable orchestration environments to support consistent deployment and application management.",
+        "Containerize applications using Docker and configure Kubernetes orchestration where appropriate to support consistent deployment, workload management and application scalability.",
     },
     {
       title: "Cloud infrastructure engineering",
       description:
-        "Configure application servers, databases, networking, environment settings and infrastructure resources according to project requirements.",
+        "Design and configure cloud infrastructure, application servers, databases, networking and environment settings aligned with application architecture and operational requirements.",
     },
     {
       title: "Application monitoring & observability",
       description:
-        "Implement application logging, infrastructure monitoring, health checks and error tracking to support production troubleshooting and operational visibility.",
+        "Implement application monitoring, centralized logging, infrastructure health checks and error tracking to improve operational visibility and support production troubleshooting.",
     },
     {
-      title: "Infrastructure modernization",
+      title: "Cloud infrastructure modernization",
       description:
-        "Review existing deployment environments and improve infrastructure configuration, resource utilization, deployment workflows and application maintainability.",
+        "Review existing hosting and deployment environments to improve infrastructure configuration, resource utilization, release workflows and long-term application maintainability.",
     },
     {
       title: "Production security & support",
       description:
-        "Incorporate appropriate access controls, secrets management, dependency maintenance, backup configurations and operational support into the software delivery process.",
+        "Incorporate access controls, secrets management, dependency maintenance, backup configurations and operational support into cloud infrastructure and DevOps workflows according to project requirements.",
     },
   ],
 
@@ -125,10 +125,10 @@ const service: ServicePageData = {
   ],
 
   ctaTitle:
-    "Looking to improve your software delivery and infrastructure?",
+    "Looking for a cloud and DevOps engineering partner?",
 
   ctaDescription:
-    "Tell us about your applications, current infrastructure and deployment requirements. We can help you explore a suitable cloud engineering and DevOps approach.",
+    "Share your applications, existing infrastructure and deployment requirements. We can help you plan cloud deployment, CI/CD automation, infrastructure modernization and production operations.",
 };
 
 export const metadata = createServiceMetadata(service);

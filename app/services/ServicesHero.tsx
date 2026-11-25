@@ -43,11 +43,11 @@ export default function ServicesHero() {
         <div className={styles.content}>
 
           <p className={styles.description}>
-            From building new digital products to
-            modernizing enterprise systems, we provide
-            custom software development, artificial
-            intelligence and technology services
-            tailored to your business requirements.
+            We provide software engineering and AI development
+            services for businesses worldwide. From custom applications
+            and SaaS products to enterprise ERP systems, generative AI
+            and cloud deployment, we help organizations build
+            and modernize their software.
           </p>
 
           <div className={styles.actions}>

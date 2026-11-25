@@ -7,14 +7,15 @@ import GlobalCollaboration from "./GlobalCollaboration";
 import AboutCTA from "./AboutCTA";
 import AboutStructuredData from "./AboutStructuredData";
 
+const description = "Indovate Technologies is an India-based software and AI engineering company providing custom software and enterprise technology services worldwide.";
+
 export const metadata: Metadata = {
   title: {
     absolute:
       "About Indovate Technologies | Software & AI Engineering Company",
   },
 
-  description:
-    "Learn about Indovate Technologies, an India-based software and AI engineering company focused on custom software, enterprise applications and technology services for businesses worldwide.",
+  description,
 
   alternates: {
     canonical: "/about",
@@ -24,8 +25,7 @@ export const metadata: Metadata = {
     title:
       "About Indovate Technologies | Software & AI Engineering Company",
 
-    description:
-      "Discover our approach to software engineering, artificial intelligence and enterprise technology solutions.",
+    description,
 
     url: "/about",
     siteName: "Indovate Technologies",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
 
     images: [
       {
-        url: "/Images/indovatelogo.png",
+        url: "/Images/indovate-brand-logo.png",
         alt: "Indovate Technologies",
       },
     ],
@@ -46,10 +46,9 @@ export const metadata: Metadata = {
     title:
       "About Indovate Technologies | Software & AI Engineering Company",
 
-    description:
-      "An India-based software and AI engineering company working with businesses worldwide.",
+    description,
 
-    images: ["/Images/indovatelogo.png"],
+    images: ["/Images/indovate-brand-logo.png"],
   },
 };
 

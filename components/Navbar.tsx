@@ -63,7 +63,8 @@ function Navigation({ pathname }: { pathname: string }) {
           aria-label="Indovate Technologies homepage"
         >
           <Image
-            src="/Images/indovatelogo.png"
+            loading="eager"
+            src="/Images/indovate-brand-logo.png"
             alt=""
             width={46}
             height={46}

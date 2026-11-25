@@ -8,47 +8,47 @@ const service: ServicePageData = {
 
   name: "Web Application & SaaS Development",
 
-  seoTitle: "Web Application & SaaS Development Services",
+  seoTitle: "Web & SaaS Development Services",
 
   seoDescription:
-    "Build custom web applications, SaaS products, customer portals and multi-tenant platforms with Indovate Technologies.",
+    "Custom web application and SaaS development services for MVPs, multi-tenant platforms, customer portals, dashboards and subscription-based products.",
 
   headline:
-    "Web applications and SaaS products built for growth.",
+    "Web and SaaS development built for growth.",
 
   introduction:
-    "We develop modern web applications and software-as-a-service products tailored to your users, business model and operational requirements. From initial MVP development to extending established platforms, we focus on usability, maintainable architecture and reliable application delivery.",
+    "We provide custom web application and SaaS development services for startups, growing businesses and enterprises. From MVP development to multi-tenant SaaS platforms, we build applications around your product requirements, users and business model, with a focus on maintainable architecture and reliable delivery.",
 
   offerings: [
     {
       title: "Custom web application development",
       description:
-        "Build responsive, database-driven web applications with intuitive interfaces, business-specific functionality and maintainable backend architecture.",
+        "Build responsive, database-driven web applications using frontend technologies such as React, Angular and Next.js, supported by maintainable backend architecture, REST APIs and database integrations.",
     },
     {
       title: "SaaS product development",
       description:
-        "Develop subscription-based software products with user management, product workflows, billing integrations and administrative capabilities.",
+        "Develop SaaS products with subscription management, user authentication, business workflows, billing integrations and administrative capabilities aligned with your product requirements.",
     },
     {
-      title: "Multi-tenant SaaS platforms",
+      title: "Multi-tenant SaaS development",
       description:
-        "Design platforms that support multiple organizations through appropriate tenant isolation, access controls and organization-specific configurations.",
+        "Design multi-tenant SaaS platforms that support multiple organizations through appropriate tenant isolation, role-based access controls and organization-specific configurations.",
     },
     {
-      title: "MVP development",
+      title: "MVP development for SaaS products",
       description:
-        "Transform product requirements into an initial working application, allowing teams to validate core functionality and gather user feedback before expanding the product.",
+        "Build a minimum viable product (MVP) around your essential requirements, helping teams validate core functionality, gather user feedback and plan future product development.",
     },
     {
-      title: "Customer portals & dashboards",
+      title: "Customer portal & dashboard development",
       description:
-        "Develop customer-facing portals, administrative dashboards and reporting interfaces that provide relevant information and simplify user interactions.",
+        "Develop customer self-service portals, administrative dashboards and reporting applications that connect business data with practical, user-friendly interfaces.",
     },
     {
       title: "Authentication & payment integrations",
       description:
-        "Integrate authentication, role-based authorization, subscription management, payment providers and third-party services according to application requirements.",
+        "Integrate user authentication, role-based authorization, subscription billing, payment providers and third-party APIs according to application and business requirements.",
     },
   ],
 
@@ -112,10 +112,10 @@ const service: ServicePageData = {
   ],
 
   ctaTitle:
-    "Planning your next web application or SaaS product?",
+    "Looking for a web or SaaS development partner?",
 
   ctaDescription:
-    "Tell us about your product idea, target users and technical requirements. We can help you explore the right architecture and development approach.",
+    "Share your product idea, target users, business model and technical requirements. We can help you plan your web application, SaaS platform or MVP development approach.",
 };
 
 export const metadata = createServiceMetadata(service);

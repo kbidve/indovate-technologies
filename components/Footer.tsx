@@ -78,7 +78,7 @@ export default function Footer() {
               aria-label="Indovate Technologies homepage"
             >
               <Image
-                src="/Images/indovatelogo.png"
+                src="/Images/indovate-brand-logo.png"
                 alt=""
                 width={44}
                 height={44}

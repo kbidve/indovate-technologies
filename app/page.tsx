@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     locale: "en_IN",
     images: [
       {
-        url: "/Images/indovatelogo.png",
+        url: "/Images/indovate-brand-logo.png",
         alt: "Indovate Technologies",
       },
     ],
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     title: `${title} | Indovate Technologies`,
     description,
     images: [
-      "/Images/indovatelogo.png",
+      "/Images/indovate-brand-logo.png",
     ],
   },
 };

@@ -8,47 +8,47 @@ const service: ServicePageData = {
 
   name: "AI & Generative AI Development",
 
-  seoTitle: "AI & Generative AI Development Services",
+  seoTitle: "Generative AI Development Services",
 
   seoDescription:
-    "Build enterprise AI applications, RAG systems, LLM-powered assistants, AI agents and intelligent workflows with Indovate Technologies.",
+    "Generative AI development services for enterprise RAG systems, LLM applications, AI agents, intelligent document processing and business integration.",
 
   headline:
-    "AI development for real business applications.",
+    "Generative AI development for enterprise applications.",
 
   introduction:
-    "We develop artificial intelligence solutions that connect language models, enterprise data and existing business systems. Our approach focuses on practical AI applications, reliable information retrieval, controlled automation and integration into production software.",
+    "We develop generative AI applications that connect large language models, enterprise knowledge and existing business systems. Our services include RAG development, AI assistants, agentic workflows and production AI integration, with a focus on reliable retrieval, evaluation and access controls.",
 
   offerings: [
     {
-      title: "Generative AI & LLM applications",
+      title: "Generative AI & LLM application development",
       description:
-        "Develop applications powered by large language models for content generation, information analysis, conversational interfaces and business-specific tasks.",
+        "Build custom LLM applications using large language models for content generation, information analysis, conversational interfaces and business-specific workflows.",
     },
     {
-      title: "RAG & enterprise knowledge systems",
+      title: "RAG development & enterprise knowledge systems",
       description:
-        "Build retrieval-augmented generation systems that connect AI models with internal documents, knowledge bases and business data to produce context-grounded responses.",
+        "Develop retrieval-augmented generation (RAG) systems with document ingestion, embeddings, vector search and knowledge retrieval to connect AI models with enterprise data and generate context-grounded responses.",
     },
     {
-      title: "AI assistants & copilots",
+      title: "Enterprise AI assistants & copilots",
       description:
-        "Integrate intelligent assistants into existing applications, employee portals and operational tools to help users access information and complete business tasks.",
+        "Develop and integrate AI copilots into existing business applications, employee portals and operational tools to support knowledge discovery and business tasks.",
     },
     {
-      title: "AI agents & agentic workflows",
+      title: "AI agent development & agentic workflows",
       description:
-        "Develop controlled multi-step AI workflows that retrieve information, call approved tools, interact with business applications and support human approval where required.",
+        "Build controlled AI agents and multi-step workflows using tools such as LangChain and LangGraph to retrieve information, call approved tools and interact with business systems while supporting human approval where required.",
     },
     {
-      title: "Document intelligence",
+      title: "Intelligent document processing",
       description:
-        "Build document processing pipelines for information extraction, classification, summarization and structured analysis of business documents.",
+        "Develop AI-powered document processing pipelines for information extraction, classification, summarization and structured analysis of enterprise documents, reports and proposals.",
     },
     {
-      title: "AI evaluation & production integration",
+      title: "Enterprise AI integration & evaluation",
       description:
-        "Evaluate retrieval relevance, response quality and workflow reliability while incorporating access controls, monitoring and appropriate safeguards into AI applications.",
+        "Integrate AI capabilities into production software and evaluate retrieval relevance, LLM response quality and workflow reliability. Incorporate access controls, monitoring and appropriate safeguards based on business requirements.",
     },
   ],
 
@@ -111,10 +111,10 @@ const service: ServicePageData = {
   ],
 
   ctaTitle:
-    "Ready to explore AI for your business?",
+    "Looking for a generative AI development partner?",
 
   ctaDescription:
-    "Share your business challenges, available data and existing systems. We can help you identify practical AI opportunities and define a suitable implementation approach.",
+    "Share your business requirements, available data and existing systems. We can help you evaluate RAG development, LLM applications, AI integration and intelligent automation opportunities.",
 };
 
 export const metadata = createServiceMetadata(service);

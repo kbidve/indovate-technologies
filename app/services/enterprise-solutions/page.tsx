@@ -8,52 +8,52 @@ const service: ServicePageData = {
 
   name: "ERP & Enterprise Solutions",
 
-  seoTitle: "Custom ERP & Enterprise Software Development Services",
+  seoTitle: "Custom ERP Development Services",
 
   seoDescription:
-    "Develop custom ERP, CRM and enterprise software for finance, property management, operations, reporting and business workflows with Indovate Technologies.",
+    "Custom ERP and enterprise software development services for finance, CRM, property management, inventory, reporting and business system integration.",
 
   headline:
-    "Enterprise software that connects your business.",
+    "Custom ERP and enterprise software development.",
 
   introduction:
-    "We develop custom ERP systems and enterprise applications designed around your organization's processes. From finance and operational management to reporting and system integration, we help businesses centralize information and connect their departments through maintainable software.",
+    "We develop custom ERP systems, CRM applications and enterprise software tailored to your business processes. From finance and property management to procurement, inventory and reporting, we help businesses connect departments and manage operations through integrated, maintainable software.",
 
   offerings: [
     {
-      title: "Custom ERP development",
+      title: "Custom ERP software development",
       description:
-        "Develop enterprise resource planning systems tailored to your business processes, organizational structure, operational requirements and existing infrastructure.",
+        "Develop custom enterprise resource planning (ERP) systems with business-specific modules, centralized data management, role-based access and integrations aligned with organizational requirements.",
     },
     {
-      title: "CRM development",
+      title: "Custom CRM development",
       description:
-        "Build customer relationship management applications for managing customer information, business inquiries, sales activities and customer interactions.",
+        "Build custom customer relationship management (CRM) software for managing customer records, sales activities, business inquiries and customer interactions.",
     },
     {
-      title: "Finance & accounting modules",
+      title: "Finance & accounting software",
       description:
-        "Develop software modules for financial record management, invoicing, expense tracking, transaction workflows and business reporting according to organizational requirements.",
+        "Develop finance and accounting software modules for financial records, invoicing, expense tracking, transaction workflows and business reporting within enterprise applications.",
     },
     {
-      title: "Property & asset management",
+      title: "Property & asset management software",
       description:
-        "Build applications for managing property information, assets, operational records, agreements and related business activities within a centralized system.",
+        "Build custom property and asset management applications that centralize property information, asset records, agreements, financial information and operational workflows.",
     },
     {
-      title: "Operational management systems",
+      title: "Inventory & operations management",
       description:
-        "Connect procurement, inventory, internal requests, departmental activities and approval processes through custom operational software.",
+        "Develop inventory and operations management modules that connect procurement, internal requests, departmental activities and approval workflows within an integrated ERP platform.",
     },
     {
       title: "Business reporting & dashboards",
       description:
-        "Develop reporting interfaces that bring together operational and financial information, helping authorized users access relevant business data.",
+        "Build enterprise reporting applications and business dashboards that consolidate operational and financial information for authorized users.",
     },
     {
-      title: "Enterprise system integrations",
+      title: "Enterprise application integration",
       description:
-        "Integrate existing enterprise applications, third-party APIs, databases and business services while incorporating role-based access controls and appropriate audit trails.",
+        "Integrate ERP and CRM systems with existing enterprise applications, third-party APIs, databases and business services while incorporating role-based access controls and appropriate audit trails.",
     },
   ],
 
@@ -121,10 +121,10 @@ const service: ServicePageData = {
   ],
 
   ctaTitle:
-    "Looking to build or modernize your enterprise software?",
+    "Looking for a custom ERP development partner?",
 
   ctaDescription:
-    "Tell us about your business processes, existing applications and operational requirements. We can help you explore an enterprise software solution aligned with your organization.",
+    "Share your business processes, existing systems and operational requirements. We can help you plan custom ERP development, enterprise application integration or modernization of existing business software.",
 };
 
 export const metadata = createServiceMetadata(service);

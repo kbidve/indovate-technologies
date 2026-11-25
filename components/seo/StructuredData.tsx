@@ -3,12 +3,20 @@ const siteUrl = "https://www.indovatetechnologies.com";
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
+  "@id": `${siteUrl}/#organization`,
   name: "Indovate Technologies",
   url: siteUrl,
-  logo: `${siteUrl}/Images/indovatelogo.png`,
+  logo: `${siteUrl}/Images/indovate-brand-logo.png`,
   description:
     "Indovate Technologies is a software engineering and AI engineering company building SaaS products, ERP systems, web applications, RAG systems, LLM applications, AI copilots, agentic workflows, and enterprise integrations.",
   email: "kailas.bidve@indovatetechnologies.com",
+
+  contactPoint: {
+    "@type": "ContactPoint",
+    email: "kailas.bidve@indovatetechnologies.com",
+    contactType: "business inquiries",
+    availableLanguage: "English",
+  },
   address: {
     "@type": "PostalAddress",
     streetAddress: "2nd floor, Shinde heights, Khori Galli, Vasant Nagar, Sawe Wadi",
@@ -27,42 +35,17 @@ const organizationSchema = {
 const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
+  "@id": `${siteUrl}/#website`,
   name: "Indovate Technologies",
   url: siteUrl,
   description:
     "Software engineering and AI engineering partner for SaaS, ERP, RAG, LLM applications, AI copilots, agentic workflows, and cloud-native product delivery.",
-  publisher: {
-    "@type": "Organization",
-    name: "Indovate Technologies",
-    url: siteUrl,
-  },
+  publisher: {"@id": `${siteUrl}/#organization`},
 };
 
-const professionalServiceSchema = {
-  "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  name: "Indovate Technologies",
-  url: siteUrl,
-  image: `${siteUrl}/Images/indovatelogo2.png`,
-  description:
-    "Software and AI engineering services for SaaS platforms, ERP systems, web applications, RAG systems, LLM apps, AI copilots, agentic workflows, integrations, DevOps, and cloud deployment.",
-  areaServed: ["India", "United States", "United Kingdom", "Germany", "Australia", "United Arab Emirates"],
-  serviceType: [
-    "SaaS Product Development",
-    "ERP Development",
-    "Web Application Development",
-    "AI Integration",
-    "RAG System Development",
-    "LLM Application Development",
-    "Agentic Workflow Development",
-    "Cloud and DevOps Engineering",
-    "API Development and Integration",
-  ],
-  address: organizationSchema.address,
-};
 
 export default function StructuredData() {
-  const graph = [organizationSchema, websiteSchema, professionalServiceSchema];
+  const graph = [organizationSchema, websiteSchema];
 
   return (
     <script

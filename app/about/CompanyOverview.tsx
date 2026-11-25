@@ -24,8 +24,8 @@ export default function CompanyOverview() {
               id="company-overview-heading"
               className="iv-section-heading"
             >
-              Software engineering with a
-              business-first perspective.
+              Software and AI engineering with
+              a business-first perspective.
             </h2>
 
           </div>
@@ -33,25 +33,25 @@ export default function CompanyOverview() {
           <div className={styles.content}>
 
             <p>
-              Indovate Technologies is an India-based
-              software and AI engineering company
-              focused on building technology around
+              Based in Latur, Maharashtra, India, Indovate
+              Technologies focuses on software engineering
+              and technology solutions aligned with
               real business requirements.
             </p>
 
             <p>
-              We work across custom software development,
-              enterprise applications, SaaS platforms,
-              artificial intelligence and business
-              process automation.
+              Our capabilities span custom software development,
+              SaaS product engineering, enterprise ERP systems,
+              generative AI development, business process
+              automation and cloud engineering.
             </p>
 
             <p>
-              Our approach combines technical engineering
-              with an understanding of business operations,
-              helping organizations build new products,
-              modernize existing systems and integrate
-              emerging technologies.
+              Our approach combines software architecture,
+              application development and an understanding
+              of business operations to help organizations
+              build digital products, modernize existing
+              systems and integrate new technologies.
             </p>
 
           </div>

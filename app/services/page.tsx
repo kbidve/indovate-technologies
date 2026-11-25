@@ -6,14 +6,15 @@ import EngagementModels from "./EngagementModels";
 import ServicesCTA from "./ServicesCTA";
 import ServicesStructuredData from "./ServicesStructuredData";
 
+const description = "Explore software development and AI services, including custom applications, SaaS products, ERP systems, business automation and cloud engineering.";
+
 export const metadata: Metadata = {
   title: {
     absolute:
       "Software Development & AI Services | Indovate Technologies",
   },
 
-  description:
-    "Explore custom software development, generative AI, SaaS, ERP, business automation and cloud engineering services from Indovate Technologies.",
+  description,
 
   alternates: {
     canonical: "/services",
@@ -23,8 +24,7 @@ export const metadata: Metadata = {
     title:
       "Software Development & AI Services | Indovate Technologies",
 
-    description:
-      "Custom software, enterprise applications, AI solutions and technology services tailored to your business requirements.",
+    description,
 
     url: "/services",
     siteName: "Indovate Technologies",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
 
     images: [
       {
-        url: "/Images/indovatelogo.png",
+        url: "/Images/indovate-brand-logo.png",
         alt: "Indovate Technologies",
       },
     ],
@@ -45,11 +45,10 @@ export const metadata: Metadata = {
     title:
       "Software Development & AI Services | Indovate Technologies",
 
-    description:
-      "Custom software development, AI engineering, enterprise applications and business automation services.",
+    description,
 
     images: [
-      "/Images/indovatelogo.png",
+      "/Images/indovate-brand-logo.png",
     ],
   },
 };

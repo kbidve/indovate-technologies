@@ -10,14 +10,15 @@ import BlogCTA from "./BlogCTA";
 const hasPublishedArticles =
   getPublishedArticles().length > 0;
 
+const description = "Explore practical guides on software development, generative AI, enterprise RAG, SaaS, ERP, business automation and cloud engineering.";
+
 export const metadata: Metadata = {
   title: {
     absolute:
       "Software & AI Engineering Insights | Indovate Technologies",
   },
 
-  description:
-    "Explore insights on custom software development, generative AI, enterprise systems, SaaS platforms, business automation and cloud engineering.",
+  description,
 
   alternates: {
     canonical: "/blog",
@@ -32,8 +33,7 @@ export const metadata: Metadata = {
     title:
       "Software & AI Engineering Insights | Indovate Technologies",
 
-    description:
-      "Practical technology insights for businesses exploring software development, artificial intelligence and digital transformation.",
+    description,
 
     url: "/blog",
     siteName: "Indovate Technologies",
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
 
     images: [
       {
-        url: "/Images/indovatelogo.png",
+        url: "/Images/indovate-brand-logo.png",
         alt: "Indovate Technologies",
       },
     ],
@@ -54,10 +54,9 @@ export const metadata: Metadata = {
     title:
       "Software & AI Engineering Insights | Indovate Technologies",
 
-    description:
-      "Explore practical perspectives on software engineering, enterprise technology and artificial intelligence.",
+    description,
 
-    images: ["/Images/indovatelogo.png"],
+    images: ["/Images/indovate-brand-logo.png"],
   },
 };
 

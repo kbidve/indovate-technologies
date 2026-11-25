@@ -89,7 +89,7 @@ export async function generateMetadata({
 
       images: [
         {
-          url: "/Images/indovatelogo.png",
+          url: "/Images/indovate-brand-logo.png",
           alt: "Indovate Technologies",
         },
       ],
@@ -99,7 +99,7 @@ export async function generateMetadata({
       card: "summary",
       title,
       description: article.seoDescription,
-      images: ["/Images/indovatelogo.png"],
+      images: ["/Images/indovate-brand-logo.png"],
     },
   };
 }

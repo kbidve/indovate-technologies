@@ -8,37 +8,37 @@ const services = [
     title: "Custom software development",
     href: "/services/custom-software-development",
     description:
-      "Business applications, software product development and modernization of existing systems.",
+      "Custom business applications, software product engineering, backend development and modernization of existing systems.",
   },
   {
-    title: "Artificial intelligence",
+    title: "AI & generative AI development",
     href: "/services/ai-development",
     description:
-      "Generative AI applications, enterprise RAG solutions, intelligent assistants and AI integration.",
+      "Generative AI applications, retrieval-augmented generation (RAG), LLM-powered assistants, AI agents and enterprise AI integration.",
   },
   {
     title: "Web & SaaS development",
     href: "/services/web-saas-development",
     description:
-      "Scalable web platforms, customer portals, dashboards and SaaS products.",
+      "Custom web applications, SaaS product development, customer portals, dashboards and multi-tenant platforms.",
   },
   {
-    title: "Enterprise solutions",
+    title: "ERP & enterprise solutions",
     href: "/services/enterprise-solutions",
     description:
-      "Custom ERP, CRM and integrated applications that connect business operations.",
+      "Custom ERP development, CRM systems and enterprise software integrations that connect business operations.",
   },
   {
     title: "Business process automation",
     href: "/services/business-automation",
     description:
-      "Workflow automation, intelligent document processing and third-party system integrations.",
+      "Business process automation, AI-powered workflows, intelligent document processing and application integrations.",
   },
   {
     title: "Cloud & DevOps",
     href: "/services/cloud-devops",
     description:
-      "Cloud infrastructure, containerization, continuous delivery and application deployment.",
+      "Cloud engineering, DevOps consulting, Docker containerization, CI/CD automation and production deployment.",
   },
 ];
 
@@ -60,13 +60,13 @@ export default function WhatWeBuild() {
             id="services-heading"
             className="iv-section-heading"
           >
-            What we do.
+            Software development and AI services.
           </h2>
 
           <p className="iv-section-description">
-            Software development, artificial intelligence
-            and technology services for businesses at
-            every stage of growth.
+            End-to-end software engineering services for businesses
+             building digital products, modernizing enterprise systems
+             and adopting artificial intelligence.
           </p>
         </div>
 

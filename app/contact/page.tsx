@@ -4,14 +4,15 @@ import ContactInformation from "./ContactInformation";
 import ContactStructuredData from "./ContactStructuredData";
 import Contact from "@/components/Contact";
 
+const description = "Contact Indovate Technologies to discuss custom software development, enterprise systems, AI integration, SaaS platforms and technology projects.";
+
 export const metadata: Metadata = {
   title: {
     absolute:
       "Contact Us | Software & AI Projects | Indovate Technologies",
   },
 
-  description:
-    "Contact Indovate Technologies to discuss custom software development, enterprise systems, AI integration, SaaS platforms and technology projects.",
+  description,
 
   alternates: {
     canonical: "/contact",
@@ -21,8 +22,7 @@ export const metadata: Metadata = {
     title:
       "Contact Us | Software & AI Projects | Indovate Technologies",
 
-    description:
-      "Discuss your software development, enterprise technology or AI project with Indovate Technologies.",
+    description,
 
     url: "/contact",
     siteName: "Indovate Technologies",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
 
     images: [
       {
-        url: "/Images/indovatelogo.png",
+        url: "/Images/indovate-brand-logo.png",
         alt: "Indovate Technologies",
       },
     ],
@@ -43,10 +43,9 @@ export const metadata: Metadata = {
     title:
       "Contact Us | Software & AI Projects | Indovate Technologies",
 
-    description:
-      "Connect with Indovate Technologies to discuss your next software or artificial intelligence project.",
+    description,
 
-    images: ["/Images/indovatelogo.png"],
+    images: ["/Images/indovate-brand-logo.png"],
   },
 };
 

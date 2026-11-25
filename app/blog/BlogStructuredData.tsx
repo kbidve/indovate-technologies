@@ -19,16 +19,14 @@ export default function BlogStructuredData() {
       name: "Software & AI Engineering Insights",
 
       description:
-        "Explore insights on custom software development, generative AI, enterprise systems, SaaS platforms, business automation and cloud engineering.",
+        "Explore practical guides on software development, generative AI, enterprise RAG, SaaS, ERP, business automation and cloud engineering.",
 
       url: pageUrl,
       inLanguage: "en",
 
-      publisher: {
-        "@type": "Organization",
-        name: "Indovate Technologies",
-        url: siteUrl,
-      },
+      isPartOf: {"@id": `${siteUrl}/#website`},
+
+      publisher: {"@id": `${siteUrl}/#organization`},
 
       mainEntity: {
         "@id": `${pageUrl}#articles`,

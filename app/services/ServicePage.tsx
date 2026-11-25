@@ -58,7 +58,7 @@ export function createServiceMetadata(
       locale: "en_IN",
       images: [
         {
-          url: "/Images/indovatelogo.png",
+          url: "/Images/indovate-brand-logo.png",
           alt: "Indovate Technologies",
         },
       ],
@@ -68,7 +68,7 @@ export function createServiceMetadata(
       card: "summary",
       title,
       description: service.seoDescription,
-      images: ["/Images/indovatelogo.png"],
+      images: ["/Images/indovate-brand-logo.png"],
     },
   };
 }
@@ -84,6 +84,7 @@ export default function ServicePage({
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
+      "@id": `${url}#breadcrumb`,
       itemListElement: [
         {
           "@type": "ListItem",
@@ -108,15 +109,12 @@ export default function ServicePage({
     {
       "@context": "https://schema.org",
       "@type": "Service",
+      "@id": `${url}#service`,
       name: service.name,
       serviceType: service.name,
       description: service.seoDescription,
       url,
-      provider: {
-        "@type": "Organization",
-        name: "Indovate Technologies",
-        url: siteUrl,
-      },
+      provider: {"@id": `${siteUrl}/#organization`},
     },
   ];
 

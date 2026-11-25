@@ -30,15 +30,15 @@ export default function PortfolioHero() {
           id="portfolio-heading"
           className={styles.heading}
         >
-          Software engineering in practice.
+          Software and AI engineering in practice.
         </h1>
 
         <p className={styles.description}>
-          Explore our work across enterprise software,
-          artificial intelligence, digital products
-          and connected business systems. Discover how
-          we approach business requirements through
-          software architecture and engineering.
+          Explore our software development portfolio,
+          including custom ERP platforms, enterprise AI applications,
+          SaaS products and business automation. See how we approach
+          business requirements through software architecture,
+          application development and system integration.
         </p>
 
         <div className={styles.actions}>
