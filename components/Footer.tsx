@@ -1,4 +1,3 @@
-import MotionPreference from "./MotionPreference";
 import Link from "next/link";
 import BrandLogo from "./BrandLogo";
 
@@ -210,9 +209,6 @@ export default function Footer() {
 
         <CookieConsent />
 
-      </div>
-    <div className="iv-container iv-motion-preference">
-        <MotionPreference />
       </div>
     </footer>
   );
