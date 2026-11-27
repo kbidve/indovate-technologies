@@ -1,230 +1,555 @@
 "use client";
 
 import Link from "next/link";
+import BrandLogo from "./BrandLogo";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import Image from "next/image";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+
 import {
-  FaArrowRight,
-  FaBars,
-  FaBrain,
-  FaCodeBranch,
-  FaTimes,
-} from "react-icons/fa";
-import { label } from "framer-motion/client";
+  FiArrowRight,
+  FiArrowUpRight,
+  FiChevronDown,
+  FiMenu,
+  FiX,
+} from "react-icons/fi";
 
-const navLinks = [
-  { href: "/#solutions", label: "Solutions" },
-  { href: "/#ai-capabilities", label: "AI" },
-  { href: "/#engineering", label: "We build" },
-  { href: "/#work", label: "Work" },
-  { href: "/about", label: "About" },
-  { href: "/#trusted-clients", label: "Trusted Clients"},
-];
+import {
+  navigationMenus,
+  type NavigationMenu,
+} from "./navigation-data";
 
-const mobileQuickLinks = [
-  { href: "/ai-project-advisor", label: "AI Project Advisor" },
-  { href: "/#process", label: "Delivery Process" },
-  { href: "/services", label: "All Services" },
-  { href: "/portfolio", label: "Portfolio" },
-  { href: "/contact", label: "Contact" },
-];
+import styles from "./Navbar.module.css";
+
+type MenuContentProps = {
+  menu: NavigationMenu;
+  pathname: string;
+  onNavigate: () => void;
+};
+
+function MenuContent({
+  menu,
+  pathname,
+  onNavigate,
+}: MenuContentProps) {
+  return (
+    <>
+      <div className={styles.panelGrid}>
+        {menu.groups.map((group) => (
+          <div
+            key={group.title}
+            className={styles.group}
+          >
+            <p className={styles.groupTitle}>
+              {group.title}
+            </p>
+
+            <ul className={styles.linkList}>
+              {group.links.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    prefetch={false}
+                    className={styles.menuLink}
+                    onClick={onNavigate}
+                    aria-current={
+                      pathname === link.href
+                        ? "page"
+                        : undefined
+                    }
+                  >
+                    <span className={styles.linkContent}>
+                      <span className={styles.linkTitle}>
+                        {link.label}
+                      </span>
+
+                      <span className={styles.linkDescription}>
+                        {link.description}
+                      </span>
+                    </span>
+
+                    <FiArrowUpRight
+                      className={styles.linkArrow}
+                      size={17}
+                      aria-hidden="true"
+                    />
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+
+      <div className={styles.panelFooter}>
+        <Link
+          href={menu.overview.href}
+          prefetch={false}
+          onClick={onNavigate}
+          className={styles.overviewLink}
+        >
+          {menu.overview.label}
+
+          <FiArrowRight
+            size={18}
+            aria-hidden="true"
+          />
+        </Link>
+      </div>
+    </>
+  );
+}
+
+function Navigation({
+  pathname,
+}: {
+  pathname: string;
+}) {
+  const [active, setActive] =
+    useState<string | null>(null);
+
+  const [mobileOpen, setMobileOpen] =
+    useState(false);
+
+  const [mobileSection, setMobileSection] =
+    useState<string | null>(null);
+
+  const headerRef = useRef<HTMLElement>(null);
+
+  const surfaceRef = useRef<HTMLDivElement>(null);
+
+  const previousMenu = useRef<string | null>(null);
+
+  useLayoutEffect(() => {
+    const surface = surfaceRef.current;
+
+    if (!surface) return;
+
+    if (!active) {
+      previousMenu.current = null;
+      return;
+    }
+
+    const panel = document.getElementById(
+      `desktop-${active}-panel`
+    );
+
+    if (!panel) return;
+
+    surface.dataset.resize =
+      String(previousMenu.current !== null);
+
+    previousMenu.current = active;
+
+    function resizeSurface() {
+      if (surface && panel) {
+        surface.style.height =
+          `${panel.offsetHeight}px`;
+      }
+    }
+
+    resizeSurface();
+
+    const observer = new ResizeObserver(
+      resizeSurface
+    );
+
+    observer.observe(panel);
+
+    return () => observer.disconnect();
+  }, [active]);
+
+  const mobileButton =
+    useRef<HTMLButtonElement>(null);
+
+  function closeNavigation() {
+    setActive(null);
+    setMobileOpen(false);
+    setMobileSection(null);
+  }
+
+  function isActive(menu: NavigationMenu) {
+    if (menu.id === "solutions") return false;
+
+    const href = menu.overview.href;
+
+    return (
+      pathname === href ||
+      pathname.startsWith(`${href}/`) ||
+      (menu.id === "company" &&
+        pathname === "/contact")
+    );
+  }
+
+  useEffect(() => {
+    function handleOutsideClick(
+      event: PointerEvent
+    ) {
+      if (
+        event.target instanceof Node &&
+        !headerRef.current?.contains(event.target)
+      ) {
+        setActive(null);
+        setMobileOpen(false);
+        setMobileSection(null);
+      }
+    }
+
+    const media = window.matchMedia(
+      "(min-width: 1200px)"
+    );
+
+    function handleBreakpointChange() {
+      setActive(null);
+      setMobileOpen(false);
+      setMobileSection(null);
+    }
+
+    document.addEventListener(
+      "pointerdown",
+      handleOutsideClick
+    );
+
+    media.addEventListener(
+      "change",
+      handleBreakpointChange
+    );
+
+    return () => {
+      document.removeEventListener(
+        "pointerdown",
+        handleOutsideClick
+      );
+
+      media.removeEventListener(
+        "change",
+        handleBreakpointChange
+      );
+    };
+  }, []);
+
+  return (
+    <header
+      ref={headerRef}
+      className={`iv-header ${styles.header}`}
+      onKeyDown={(event) => {
+        if (event.key !== "Escape") return;
+
+        if (mobileOpen) {
+          event.preventDefault();
+
+          closeNavigation();
+          mobileButton.current?.focus();
+
+          return;
+        }
+
+        if (active) {
+          event.preventDefault();
+
+          document
+            .getElementById(
+              `desktop-${active}-trigger`
+            )
+            ?.focus();
+
+          setActive(null);
+        }
+      }}
+    >
+      <div className={`iv-container ${styles.inner}`}>
+
+        <Link
+          href="/"
+          className={`iv-brand ${styles.brand}`}
+          onClick={closeNavigation}
+        >
+          <BrandLogo
+            staticSrc="/Images/indovate-brand-logo.png"
+            alt=""
+            width={46}
+            height={46}
+            loading="eager"
+            className={styles.brandImage}
+          />
+
+          <div className={styles.brandText}>
+            <span className="iv-brand-name">
+              Indovate Technologies
+            </span>
+
+            <span className="iv-brand-caption">
+              Software &amp; AI Engineering
+            </span>
+          </div>
+        </Link>
+
+        <nav
+          className={styles.desktop}
+          aria-label="Main navigation"
+          onPointerLeave={(event) => {
+            if (event.pointerType !== "mouse") return;
+
+            if (
+              event.currentTarget.querySelector(
+                "[data-mega-panel]:focus-within"
+              )
+            ) {
+              return;
+            }
+
+            setActive(null);
+          }}
+        >
+          <div
+            ref={surfaceRef}
+            className={styles.megaSurface}
+            data-mega-surface
+            data-open={active !== null}
+            aria-hidden="true"
+          />
+          <Link
+            href="/"
+            className={styles.topLink}
+            aria-current={
+              pathname === "/" ? "page" : undefined
+            }
+            onClick={closeNavigation}
+            onPointerEnter={(event) => {
+              if (
+                event.pointerType === "mouse" &&
+                !headerRef.current?.querySelector(
+                  "[data-mega-panel]:focus-within"
+                )
+              ) {
+                setActive(null);
+              }
+            }}
+          >
+            Home
+          </Link>
+
+          {navigationMenus.map((menu) => {
+            const expanded = active === menu.id;
+
+            const panelId =
+              `desktop-${menu.id}-panel`;
+
+            return (
+              <div
+                key={menu.id}
+                className={styles.menuItem}
+
+                onPointerEnter={(event) => {
+                  if (
+                    event.pointerType === "mouse" &&
+                    !headerRef.current?.querySelector(
+                      "[data-mega-panel]:focus-within"
+                    )
+                  ) {
+                    setActive(menu.id);
+                  }
+                }}
+
+                onBlur={(event) => {
+                  if (
+                    event.relatedTarget instanceof Node &&
+                    event.currentTarget.contains(
+                      event.relatedTarget
+                    )
+                  ) {
+                    return;
+                  }
+
+                  setActive((current) =>
+                    current === menu.id
+                      ? null
+                      : current
+                  );
+                }}
+              >
+                <button
+                  type="button"
+                  id={`desktop-${menu.id}-trigger`}
+                  className={styles.trigger}
+                  aria-expanded={expanded}
+                  aria-controls={panelId}
+                  data-active={isActive(menu)}
+                  onClick={() =>
+                    setActive((current) =>
+                      current === menu.id
+                        ? null
+                        : menu.id
+                    )
+                  }
+                >
+                  {menu.label}
+
+                  <FiChevronDown
+                    size={15}
+                    className={styles.chevron}
+                    aria-hidden="true"
+                  />
+                </button>
+
+                <div
+                  id={panelId}
+                  className={styles.megaPanel}
+                  data-mega-panel
+                  data-open={expanded}
+                  inert={!expanded}
+                >
+                  <MenuContent
+                    menu={menu}
+                    pathname={pathname}
+                    onNavigate={closeNavigation}
+                  />
+                </div>
+              </div>
+            );
+          })}
+        </nav>
+
+        <Link
+          href="/contact"
+          className={`iv-button-primary ${styles.desktopCta}`}
+          onClick={closeNavigation}
+        >
+          Discuss Your Project
+
+          <FiArrowRight
+            size={18}
+            aria-hidden="true"
+          />
+        </Link>
+
+        <button
+          ref={mobileButton}
+          type="button"
+          className={styles.menuButton}
+          aria-label={
+            mobileOpen
+              ? "Close navigation"
+              : "Open navigation"
+          }
+          aria-expanded={mobileOpen}
+          aria-controls="mobile-navigation"
+          onClick={() => {
+            setMobileOpen(!mobileOpen);
+            setMobileSection(null);
+          }}
+        >
+          {mobileOpen ? (
+            <FiX size={24} aria-hidden="true" />
+          ) : (
+            <FiMenu size={24} aria-hidden="true" />
+          )}
+        </button>
+
+      </div>
+
+      <nav
+        id="mobile-navigation"
+        className={styles.mobile}
+        aria-label="Mobile navigation"
+        data-open={mobileOpen}
+        inert={!mobileOpen}
+      >
+        <div className={styles.mobileScroll}>
+        <div className="iv-container">
+
+          <Link
+            href="/"
+            className={styles.mobileHome}
+            aria-current={
+              pathname === "/" ? "page" : undefined
+            }
+            onClick={closeNavigation}
+          >
+            Home
+          </Link>
+
+          {navigationMenus.map((menu) => {
+            const expanded =
+              mobileSection === menu.id;
+
+            const panelId =
+              `mobile-${menu.id}-panel`;
+
+            return (
+              <div
+                key={menu.id}
+                className={styles.mobileItem}
+              >
+                <button
+                  type="button"
+                  className={styles.mobileTrigger}
+                  aria-expanded={expanded}
+                  aria-controls={panelId}
+                  data-active={isActive(menu)}
+                  onClick={() =>
+                    setMobileSection((current) =>
+                      current === menu.id
+                        ? null
+                        : menu.id
+                    )
+                  }
+                >
+                  {menu.label}
+
+                  <FiChevronDown
+                    size={20}
+                    className={styles.chevron}
+                    aria-hidden="true"
+                  />
+                </button>
+
+                <div
+                  id={panelId}
+                  className={styles.mobilePanel}
+                  data-open={expanded}
+                  inert={!expanded}
+                >
+                  <div className={styles.mobilePanelInner}>
+                    <div className={styles.mobilePanelContent}>
+                      <MenuContent
+                        menu={menu}
+                        pathname={pathname}
+                        onNavigate={closeNavigation}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+
+          <Link
+            href="/contact"
+            className={`iv-button-primary ${styles.mobileCta}`}
+            onClick={closeNavigation}
+          >
+            Discuss Your Project
+
+            <FiArrowRight
+              size={18}
+              aria-hidden="true"
+            />
+          </Link>
+
+        </div>
+        </div>
+      </nav>
+    </header>
+  );
+}
 
 export default function Navbar() {
   const pathname = usePathname();
-  const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
-
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
-
-  useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
-
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [open]);
-
-  const closeMenu = () => setOpen(false);
 
   return (
-    <motion.header
-      initial={{ opacity: 0, y: -18 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.45, ease: "easeOut" }}
-      className={`sticky top-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "border-b border-slate-200/70 bg-white/88 shadow-soft backdrop-blur-2xl dark:border-white/10 dark:bg-ai-ink/85"
-          : "border-b border-transparent bg-white/70 backdrop-blur-xl dark:bg-ai-ink/55"
-      }`}
-    >
-      <div className="container-wide flex h-20 items-center justify-between gap-4 lg:gap-6">
-        <Link href="/" className="group flex min-w-0 items-center gap-3">
-          <span className="relative flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-2xl ">
-            {/* <span className="absolute inset-0 bg-white/10 opacity-0 transition-opacity group-hover:opacity-100" /> */}
-            <Image
-              src="/Images/indovatelogo.png"
-              alt="Indovate Technologies Logo"
-              width={400}
-              height={400}
-              className="relative z-15 h-10 w-15 object-contain"
-            />
-          </span>
-
-          <span className="min-w-0">
-            <span className="block truncate text-base font-bold leading-tight text-slate-950 dark:text-white sm:text-lg">
-              Indovate Technologies
-            </span>
-            <span className="hidden text-xs font-medium uppercase tracking-[0.24em] text-slate-500 dark:text-cyan-100/70 sm:block">
-              Software + Agentic FLow
-            </span>
-          </span>
-        </Link>
-
-        <nav className="hidden items-center gap-1 rounded-full border border-slate-200/70 bg-white/70 p-1 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-white/[0.06] lg:flex">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="rounded-full px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100 hover:text-slate-950 dark:text-slate-200 dark:hover:bg-white/10 dark:hover:text-white"
-            >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
-
-        <div className="hidden items-center gap-3 lg:flex">
-          <Link
-            href="/ai-project-advisor"
-            className="inline-flex items-center gap-2 rounded-2xl border border-cyan-300/20 bg-cyan-300/10 px-4 py-2.5 text-sm font-semibold text-cyan-700 transition hover:-translate-y-0.5 hover:bg-cyan-300/15 dark:text-cyan-100"
-          >
-            <FaCodeBranch className="text-xs" />
-            AI Advisor
-          </Link>
-
-          <Link href="/contact" className="btn-primary group text-sm">
-            Start a Project
-            <FaArrowRight className="text-xs transition-transform group-hover:translate-x-1" />
-          </Link>
-        </div>
-
-        <button
-          type="button"
-          onClick={() => setOpen(true)}
-          className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-slate-200 bg-white text-slate-950 shadow-sm transition hover:bg-slate-50 dark:border-white/10 dark:bg-white/[0.06] dark:text-white lg:hidden"
-          aria-label="Open navigation menu"
-          aria-expanded={open}
-        >
-          <FaBars />
-        </button>
-      </div>
-
-      <AnimatePresence>
-        {open ? (
-          <motion.aside
-            className="fixed inset-0 z-[90] flex safe-drawer-height flex-col overflow-y-auto bg-ai-ink px-6 py-6 text-white shadow-2xl lg:hidden"
-            initial={{ opacity: 0, y: -12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.22, ease: "easeOut" }}
-          >
-            <div className="flex items-center justify-between gap-4 border-b border-white/10 pb-5">
-              <Link
-                href="/"
-                onClick={closeMenu}
-                className="flex min-w-0 items-center gap-3"
-              >
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-ai-gradient shadow-glow">
-                  <FaBrain className="text-lg text-white" />
-                </span>
-                <span className="min-w-0">
-                  <span className="block truncate text-lg font-black text-white">
-                    Indovate Technologies
-                  </span>
-                  <span className="block text-xs font-semibold uppercase tracking-[0.22em] text-cyan-200/80">
-                    Software + AI
-                  </span>
-                </span>
-              </Link>
-
-              <button
-                type="button"
-                onClick={closeMenu}
-                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-white/10 text-white transition hover:bg-white/15"
-                aria-label="Close navigation menu"
-              >
-                <FaTimes />
-              </button>
-            </div>
-
-            <div className="mt-6">
-              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-cyan-200/80">
-                Main navigation
-              </p>
-              <div className="mt-4 grid gap-3">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={closeMenu}
-                    className="rounded-2xl border border-white/10 bg-white/[0.06] px-5 py-4 text-lg font-black text-slate-100 transition hover:border-cyan-300/30 hover:bg-cyan-300/10"
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
-
-            <div className="mt-6 rounded-3xl border border-cyan-300/20 bg-cyan-300/10 p-5">
-              <p className="text-sm font-semibold uppercase tracking-[0.22em] text-cyan-100">
-                Explore key sections
-              </p>
-              <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
-                {mobileQuickLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={closeMenu}
-                    className="rounded-xl border border-white/10 bg-black/15 px-4 py-3 text-sm font-semibold text-slate-300 transition hover:border-cyan-300/30 hover:text-white"
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
-
-            <div className="mt-auto grid gap-3 pt-8">
-              <Link
-                href="/ai-project-advisor"
-                onClick={closeMenu}
-                className="btn-secondary w-full"
-              >
-                Try AI Advisor
-              </Link>
-              <Link
-                href="/contact"
-                onClick={closeMenu}
-                className="btn-primary w-full"
-              >
-                Start a Project
-                <FaArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </div>
-          </motion.aside>
-        ) : null}
-      </AnimatePresence>
-    </motion.header>
+    <Navigation
+      key={pathname}
+      pathname={pathname}
+    />
   );
 }

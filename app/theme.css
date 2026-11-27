@@ -1,0 +1,125 @@
+/* ==========================================
+   AUTOMATIC WEBSITE THEME
+   ========================================== */
+
+:root {
+  color-scheme: light dark;
+
+  --iv-primary: #0f172a;
+  --iv-accent: #c2410c;
+  --iv-background: #ffffff;
+  --iv-surface: #f8fafc;
+  --iv-card: #ffffff;
+  --iv-text: #475569;
+  --iv-muted: #64748b;
+  --iv-border: #e2e8f0;
+  --iv-icon-bg: #fff7ed;
+
+  --iv-action: #c2410c;
+  --iv-action-hover: #9a3412;
+
+  --iv-hero-bg: #f8fafc;
+  --iv-hero-card: #ffffff;
+  --iv-hero-text: #475569;
+  --iv-hero-border: #e2e8f0;
+}
+
+/* Dark theme */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --iv-primary: #f8fafc;
+    --iv-accent: #fdba74;
+    --iv-background: #0f172a;
+    --iv-surface: #111827;
+    --iv-card: #1e293b;
+    --iv-text: #cbd5e1;
+    --iv-muted: #94a3b8;
+    --iv-border: #334155;
+    --iv-icon-bg: #3b281c;
+
+    --iv-hero-bg: #0f172a;
+    --iv-hero-card: #1e293b;
+    --iv-hero-text: #cbd5e1;
+    --iv-hero-border: #334155;
+  }
+}
+
+/* Global background */
+
+html,
+body {
+  background: var(--iv-background);
+  color: var(--iv-primary);
+}
+
+/* Buttons */
+
+.iv-button-primary {
+  background: var(--iv-action);
+  color: #ffffff;
+}
+
+.iv-button-primary:hover {
+  background: var(--iv-action-hover);
+  color: #ffffff;
+}
+
+.iv-button-secondary {
+  background: var(--iv-card);
+  color: var(--iv-primary);
+  border-color: var(--iv-border);
+}
+
+.iv-button-secondary:hover {
+  background: var(--iv-surface);
+}
+
+/* Navigation */
+
+.iv-header {
+  background: var(--iv-background);
+  color: var(--iv-primary);
+  border-color: var(--iv-border);
+}
+
+.iv-mobile-menu {
+  background: var(--iv-background);
+  border-color: var(--iv-border);
+}
+
+.iv-mobile-link {
+  color: var(--iv-primary);
+  border-color: var(--iv-border);
+}
+
+/* Homepage hero */
+
+.iv-expertise-heading,
+.iv-expertise-number,
+.iv-expertise-link {
+  color: var(--iv-accent);
+}
+
+.iv-expertise-item p {
+  color: var(--iv-hero-text);
+}
+
+.iv-expertise {
+  background: var(--iv-hero-card);
+  border-color: var(--iv-hero-border);
+}
+
+.iv-expertise-item {
+  border-color: var(--iv-hero-border);
+}
+
+.iv-expertise-item h3 {
+  color: var(--iv-primary);
+}
+
+.iv-expertise-link:hover {
+  color: var(--iv-primary);
+}
+
+/* Homepage services */

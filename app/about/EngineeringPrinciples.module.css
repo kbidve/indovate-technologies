@@ -1,0 +1,158 @@
+.section {
+  padding-block: 80px;
+  background: var(--iv-background);
+  color: var(--iv-primary);
+  border-block: 1px solid var(--iv-border);
+  scroll-margin-top: 96px;
+}
+
+.header {
+  max-width: 850px;
+  margin-bottom: 44px;
+}
+
+.header h2 {
+  font-size: clamp(32px, 4vw, 54px);
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+
+.introduction {
+  max-width: 720px;
+  margin: 20px 0 0;
+  color: var(--iv-text);
+  font-size: 17px;
+  line-height: 1.85;
+}
+
+/* Engineering principles directory */
+
+.principles {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--iv-border);
+}
+
+.principle {
+  display: grid;
+  grid-template-columns:
+    48px
+    minmax(0, 0.85fr)
+    minmax(0, 1.15fr);
+  align-items: start;
+  gap: 28px;
+  padding-block: 30px;
+  border-bottom: 1px solid var(--iv-border);
+}
+
+.number {
+  padding-top: 4px;
+  color: var(--iv-accent);
+  font-size: 14px;
+  font-weight: 750;
+  line-height: 1.6;
+}
+
+.principle h3 {
+  min-width: 0;
+  margin: 0;
+  color: var(--iv-primary);
+  font-family: var(--font-sans), sans-serif;
+  font-size: clamp(20px, 2vw, 26px);
+  font-weight: 750;
+  line-height: 1.4;
+  letter-spacing: -0.025em;
+  overflow-wrap: anywhere;
+}
+
+.principle p {
+  min-width: 0;
+  margin: 0;
+  color: var(--iv-text);
+  font-size: 16px;
+  line-height: 1.85;
+  overflow-wrap: anywhere;
+}
+
+/* Delivery process navigation */
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 100%;
+  margin-top: 30px;
+  color: var(--iv-accent);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.7;
+}
+
+.link svg {
+  flex-shrink: 0;
+}
+
+.link:hover {
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+
+.link:focus-visible {
+  outline: 3px solid var(--iv-accent);
+  outline-offset: 5px;
+}
+
+/* Tablet */
+
+@media (max-width: 1023px) {
+  .section {
+    padding-block: 64px;
+  }
+
+  .principle {
+    grid-template-columns:
+      36px
+      minmax(0, 0.85fr)
+      minmax(0, 1.15fr);
+    gap: 20px;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 767px) {
+  .section {
+    padding-block: 48px;
+  }
+
+  .header {
+    margin-bottom: 30px;
+  }
+
+  .introduction {
+    font-size: 16px;
+  }
+
+  .principle {
+    grid-template-columns: 28px minmax(0, 1fr);
+    gap: 10px 16px;
+    padding-block: 24px;
+  }
+
+  .principle h3 {
+    font-size: 21px;
+  }
+
+  .principle p {
+    grid-column: 2;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 360px) {
+  .principle {
+    column-gap: 10px;
+  }
+}
