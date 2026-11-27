@@ -8,16 +8,16 @@ const service: ServicePageData = {
 
   name: "ERP & Enterprise Solutions",
 
-  seoTitle: "Custom ERP Development Services",
+  seoTitle: "Enterprise Software & ERP Development",
 
   seoDescription:
-    "Custom ERP and enterprise software development services for finance, CRM, property management, inventory, reporting and business system integration.",
+    "Custom ERP and enterprise software development services for businesses worldwide. Integrate finance, CRM, inventory and operational workflows.",
 
   headline:
-    "Custom ERP and enterprise software development.",
+    "Enterprise software and custom ERP development services.",
 
   introduction:
-    "We develop custom ERP systems, CRM applications and enterprise software tailored to your business processes. From finance and property management to procurement, inventory and reporting, we help businesses connect departments and manage operations through integrated, maintainable software.",
+    "Indovate Technologies provides enterprise software development and custom ERP development services for businesses worldwide. We build integrated ERP systems, CRM applications, finance and inventory management software tailored to your operational requirements. Our engineering team helps organizations connect departments, centralize business information and modernize existing enterprise applications through maintainable software.",
 
   offerings: [
     {
@@ -41,7 +41,7 @@ const service: ServicePageData = {
         "Build custom property and asset management applications that centralize property information, asset records, agreements, financial information and operational workflows.",
     },
     {
-      title: "Inventory & operations management",
+      title: "Inventory management software development",
       description:
         "Develop inventory and operations management modules that connect procurement, internal requests, departmental activities and approval workflows within an integrated ERP platform.",
     },
@@ -121,10 +121,10 @@ const service: ServicePageData = {
   ],
 
   ctaTitle:
-    "Looking for a custom ERP development partner?",
+    "Looking for an enterprise software or ERP development partner?",
 
   ctaDescription:
-    "Share your business processes, existing systems and operational requirements. We can help you plan custom ERP development, enterprise application integration or modernization of existing business software.",
+    "Tell us about your business processes, required ERP modules, existing applications and operational challenges. Our engineering team can help you define the development scope, integration requirements and implementation approach for your enterprise software.",
 };
 
 export const metadata = createServiceMetadata(service);

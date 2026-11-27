@@ -3,6 +3,7 @@ import { FiArrowRight } from "react-icons/fi";
 import type { Metadata } from "next";
 
 import RelatedInsights from "./RelatedInsights";
+import ServiceBuyerGuide from "./ServiceBuyerGuide";
 
 import styles from "./ServicePage.module.css";
 
@@ -296,6 +297,8 @@ export default function ServicePage({
 
         </div>
       </section>
+
+      <ServiceBuyerGuide serviceSlug={service.slug} />
 
       <RelatedInsights serviceSlug={service.slug} />
 

@@ -375,3 +375,34 @@ export function enableAnalytics(pathname: string) {
 
   lastPath = pathname;
 }
+
+export function trackProjectInquiry(): void {
+  try {
+    if (typeof window === "undefined") return;
+
+    if (getConsent() !== "accepted") return;
+
+    if (!initialized || !analyticsEnabled) return;
+
+    const id = getAnalyticsId();
+
+    if (!id) return;
+
+    const browser = window as AnalyticsWindow;
+
+    if (Reflect.get(browser, "ga-disable-" + id) === true) {
+      return;
+    }
+
+    if (typeof browser.gtag !== "function") return;
+
+    browser.gtag("event", "generate_lead", {
+      send_to: id,
+      lead_source: "contact_form",
+      page_location: window.location.origin + window.location.pathname,
+    });
+
+  } catch {
+    // Analytics must never interfere with a successful inquiry.
+  }
+}

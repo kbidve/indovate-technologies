@@ -8,16 +8,16 @@ const service: ServicePageData = {
 
   name: "Custom Software Development",
 
-  seoTitle: "Custom Software Development Services",
+  seoTitle: "Custom Software Development Company",
 
   seoDescription:
-    "Custom software development services for business applications, product engineering, legacy modernization, backend systems and API integration.",
+    "Custom software development services for businesses worldwide. Build business applications, modernize legacy software and integrate enterprise systems.",
 
   headline:
-    "Custom software development built around your business.",
+    "Custom software development services for your business.",
 
   introduction:
-    "We provide custom software development services for businesses building digital products, modernizing legacy applications and integrating enterprise systems. Our engineering capabilities cover frontend applications, backend development, REST APIs and database integrations. We focus on maintainable software aligned with your business requirements and long-term objectives.",
+    "Indovate Technologies is a custom software development company helping businesses worldwide build digital products, modernize legacy applications and integrate enterprise systems. Our engineering team develops custom business software, scalable backend services, frontend applications and REST APIs using technologies such as Python, Django, FastAPI and React. We focus on maintainable architecture, reliable delivery and software aligned with your long-term business objectives.",
 
   offerings: [
     {
@@ -36,7 +36,7 @@ const service: ServicePageData = {
         "Modernize legacy software systems by reviewing existing architecture, replacing outdated components, improving application maintainability and integrating newer technologies.",
     },
     {
-      title: "Backend & API development",
+      title: "Python backend & API development",
       description:
         "Develop backend services using Python, Django and FastAPI, with REST APIs, database integrations and application architecture designed around business requirements.",
     },
@@ -105,10 +105,10 @@ const service: ServicePageData = {
   ],
 
   ctaTitle:
-    "Looking for a custom software development partner?",
+    "Need a reliable software development partner?",
 
   ctaDescription:
-    "Share your requirements, existing systems and business objectives. We can help you explore a suitable software development approach.",
+    "Tell us about your software requirements, existing systems, business objectives and expected project timeline. Our engineering team can help you define a suitable architecture, development scope and implementation approach.",
 };
 
 export const metadata = createServiceMetadata(service);

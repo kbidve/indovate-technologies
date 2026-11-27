@@ -8,16 +8,16 @@ const service: ServicePageData = {
 
   name: "AI & Generative AI Development",
 
-  seoTitle: "Generative AI Development Services",
+  seoTitle: "AI Development Services & Generative AI",
 
   seoDescription:
-    "Generative AI development services for enterprise RAG systems, LLM applications, AI agents, intelligent document processing and business integration.",
+    "Custom AI development services for businesses worldwide. Build generative AI applications, RAG systems, AI agents and enterprise AI integrations.",
 
   headline:
-    "Generative AI development for enterprise applications.",
+    "AI development services for enterprise applications.",
 
   introduction:
-    "We develop generative AI applications that connect large language models, enterprise knowledge and existing business systems. Our services include RAG development, AI assistants, agentic workflows and production AI integration, with a focus on reliable retrieval, evaluation and access controls.",
+    "Indovate Technologies provides custom AI development services for businesses worldwide. We build generative AI applications, enterprise RAG systems, AI assistants and intelligent agents that connect with your existing software and business data. Our engineering approach focuses on reliable retrieval, response evaluation, access controls and production integration.",
 
   offerings: [
     {
@@ -26,7 +26,7 @@ const service: ServicePageData = {
         "Build custom LLM applications using large language models for content generation, information analysis, conversational interfaces and business-specific workflows.",
     },
     {
-      title: "RAG development & enterprise knowledge systems",
+      title: "RAG development services & enterprise knowledge systems",
       description:
         "Develop retrieval-augmented generation (RAG) systems with document ingestion, embeddings, vector search and knowledge retrieval to connect AI models with enterprise data and generate context-grounded responses.",
     },
@@ -111,10 +111,10 @@ const service: ServicePageData = {
   ],
 
   ctaTitle:
-    "Looking for a generative AI development partner?",
+    "Looking for an AI development partner?",
 
   ctaDescription:
-    "Share your business requirements, available data and existing systems. We can help you evaluate RAG development, LLM applications, AI integration and intelligent automation opportunities.",
+    "Tell us about your business objectives, available data, existing applications and expected project timeline. Our engineering team can help you evaluate the right AI architecture, integration approach and development scope for your business.",
 };
 
 export const metadata = createServiceMetadata(service);

@@ -8,16 +8,16 @@ const service: ServicePageData = {
 
   name: "Cloud & DevOps",
 
-  seoTitle: "Cloud & DevOps Consulting Services",
+  seoTitle: "Cloud Development & DevOps Services",
 
   seoDescription:
-    "Cloud and DevOps services for AWS and Azure deployment, CI/CD automation, Docker, Kubernetes, infrastructure modernization and application monitoring.",
+    "Cloud development and DevOps services for AWS, Azure, CI/CD automation, containerized applications and reliable production infrastructure.",
 
   headline:
-    "Cloud and DevOps services for reliable software delivery.",
+    "Cloud engineering and DevOps services for reliable software delivery.",
 
   introduction:
-    "We help businesses deploy, operate and modernize software through cloud engineering and DevOps services. Our capabilities include cloud infrastructure, CI/CD automation, containerization and application monitoring, with a focus on reliable software delivery and maintainable production environments.",
+    "Indovate Technologies provides cloud engineering and DevOps services for businesses worldwide. We help companies deploy software products, automate release pipelines, modernize cloud infrastructure and maintain production environments. Our capabilities include AWS and Azure deployment, Docker containerization, Kubernetes orchestration, CI/CD automation and application monitoring.",
 
   offerings: [
     {
@@ -125,10 +125,10 @@ const service: ServicePageData = {
   ],
 
   ctaTitle:
-    "Looking for a cloud and DevOps engineering partner?",
+    "Need a cloud engineering and DevOps partner?",
 
   ctaDescription:
-    "Share your applications, existing infrastructure and deployment requirements. We can help you plan cloud deployment, CI/CD automation, infrastructure modernization and production operations.",
+    "Tell us about your applications, existing cloud infrastructure, deployment challenges and operational requirements. Our engineering team can help you plan a suitable cloud architecture, automated delivery pipeline and infrastructure modernization approach.",
 };
 
 export const metadata = createServiceMetadata(service);

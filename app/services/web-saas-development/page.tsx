@@ -11,13 +11,13 @@ const service: ServicePageData = {
   seoTitle: "Web & SaaS Development Services",
 
   seoDescription:
-    "Custom web application and SaaS development services for MVPs, multi-tenant platforms, customer portals, dashboards and subscription-based products.",
+    "Web and SaaS development services for startups and enterprises worldwide. Build custom web applications, MVPs and scalable multi-tenant SaaS products.",
 
   headline:
-    "Web and SaaS development built for growth.",
+    "Custom web and SaaS development services.",
 
   introduction:
-    "We provide custom web application and SaaS development services for startups, growing businesses and enterprises. From MVP development to multi-tenant SaaS platforms, we build applications around your product requirements, users and business model, with a focus on maintainable architecture and reliable delivery.",
+    "Indovate Technologies provides web and SaaS development services for startups, growing businesses and enterprises worldwide. Our engineering team builds custom web applications, SaaS products, customer portals and multi-tenant platforms using modern frontend and backend technologies. From launching an MVP to scaling an existing product, we develop software around your users, business model and long-term growth requirements.",
 
   offerings: [
     {
@@ -26,7 +26,7 @@ const service: ServicePageData = {
         "Build responsive, database-driven web applications using frontend technologies such as React, Angular and Next.js, supported by maintainable backend architecture, REST APIs and database integrations.",
     },
     {
-      title: "SaaS product development",
+      title: "SaaS product development services",
       description:
         "Develop SaaS products with subscription management, user authentication, business workflows, billing integrations and administrative capabilities aligned with your product requirements.",
     },
@@ -112,10 +112,10 @@ const service: ServicePageData = {
   ],
 
   ctaTitle:
-    "Looking for a web or SaaS development partner?",
+    "Ready to build your web application or SaaS product?",
 
   ctaDescription:
-    "Share your product idea, target users, business model and technical requirements. We can help you plan your web application, SaaS platform or MVP development approach.",
+    "Tell us about your product idea, target users, required features and expected launch timeline. Our engineering team can help you define your MVP scope, application architecture and SaaS product development roadmap.",
 };
 
 export const metadata = createServiceMetadata(service);

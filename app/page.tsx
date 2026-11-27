@@ -13,7 +13,7 @@ const title =
   "Custom Software & AI Development Company";
 
 const description =
-  "Indovate Technologies provides custom software development, generative AI, enterprise applications and business automation services for clients worldwide.";
+  "Indovate Technologies builds custom software, SaaS platforms and AI solutions for businesses worldwide. Discuss your project with our engineering team.";
 
 export const metadata: Metadata = {
   title: { absolute: `${title} | Indovate Technologies` },

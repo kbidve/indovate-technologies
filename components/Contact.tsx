@@ -1,5 +1,7 @@
 "use client";
 
+import { trackProjectInquiry } from "@/lib/analytics-consent";
+
 import { useRef, useState } from "react";
 import { FiArrowRight } from "react-icons/fi";
 
@@ -155,6 +157,7 @@ export default function Contact() {
 
       form.reset();
       setStatus("sent");
+      trackProjectInquiry();
 
     } catch {
       setStatus("error");

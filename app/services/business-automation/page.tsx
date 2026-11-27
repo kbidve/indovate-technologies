@@ -8,25 +8,25 @@ const service: ServicePageData = {
 
   name: "Business Process Automation",
 
-  seoTitle: "Business Process Automation Services",
+  seoTitle: "AI & Business Process Automation Services",
 
   seoDescription:
-    "Business process automation services for AI workflows, document processing, approval systems, application integration and repetitive operational tasks.",
+    "Automate business operations with AI automation services, document processing, workflow automation and ERP integrations. Discuss your project with us.",
 
   headline:
-    "Business process automation with software and AI.",
+    "AI automation services for business operations.",
 
   introduction:
-    "We provide business process automation services that streamline operational workflows, reduce repetitive manual tasks and connect existing business applications. Our solutions combine rule-based software automation with AI-powered workflows where appropriate, with a focus on reliability, monitoring and human oversight.",
+    "Indovate Technologies provides AI automation and business process automation services for companies worldwide. We help businesses reduce repetitive manual work, streamline approval processes, automate document processing and connect existing applications. Our solutions combine rule-based automation with AI-powered workflows where appropriate, supported by monitoring and human oversight.",
 
   offerings: [
     {
-      title: "Business workflow automation",
+      title: "Business workflow automation services",
       description:
         "Automate business workflows for internal requests, task assignments, notifications, operational activities and information exchange between departments.",
     },
     {
-      title: "AI workflow automation & orchestration",
+      title: "AI automation & workflow orchestration",
       description:
         "Develop AI-powered automation workflows using tools such as LangChain and LangGraph to retrieve information, execute approved tools and coordinate multi-step business processes.",
     },
@@ -119,10 +119,10 @@ const service: ServicePageData = {
   ],
 
   ctaTitle:
-    "Looking to automate your business processes?",
+    "Ready to automate your business operations?",
 
   ctaDescription:
-    "Share your existing workflows, business applications and repetitive operational tasks. We can help you identify suitable software automation, AI workflow integration and business process improvement opportunities.",
+    "Tell us which business processes consume your team's time, which applications you use and what outcomes you want to achieve. Our engineering team can help identify automation opportunities and define a practical implementation plan.",
 };
 
 export const metadata = createServiceMetadata(service);
